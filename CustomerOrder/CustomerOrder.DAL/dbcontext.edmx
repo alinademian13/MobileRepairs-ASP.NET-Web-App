@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MobileRepairs1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="idClient" />
+          </Key>
+          <Property Name="idClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nume" Type="varchar" MaxLength="50" />
+          <Property Name="adresa" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Comanda">
+          <Key>
+            <PropertyRef Name="idComanda" />
+          </Key>
+          <Property Name="idComanda" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idClient" Type="int" />
+          <Property Name="idEmployee" Type="int" />
+          <Property Name="idTelefon" Type="int" />
+          <Property Name="idUnicTelefon" Type="int" Nullable="false" />
+          <Property Name="stare" Type="bit" />
+          <Property Name="DataDeschidere" Type="date" />
+          <Property Name="DataInchidere" Type="date" />
+        </EntityType>
+        <EntityType Name="ComandaDefectiune">
+          <Key>
+            <PropertyRef Name="idComanda" />
+            <PropertyRef Name="idDefectiune" />
+          </Key>
+          <Property Name="idComanda" Type="int" Nullable="false" />
+          <Property Name="idDefectiune" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="defectiune">
+          <Key>
+            <PropertyRef Name="idDefectiune" />
+          </Key>
+          <Property Name="idDefectiune" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nume" Type="varchar" MaxLength="50" />
+          <Property Name="cost" Type="int" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="idEmployee" />
+          </Key>
+          <Property Name="idEmployee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="telefon">
+          <Key>
+            <PropertyRef Name="idTelefon" />
+          </Key>
+          <Property Name="idTelefon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="brand" Type="varchar" MaxLength="50" />
+          <Property Name="marca" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Client">
+          <End Role="client" Type="Self.client" Multiplicity="0..1" />
+          <End Role="Comanda" Type="Self.Comanda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="Comanda">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comanda">
+          <End Role="Comanda" Type="Self.Comanda" Multiplicity="1" />
+          <End Role="ComandaDefectiune" Type="Self.ComandaDefectiune" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comanda">
+              <PropertyRef Name="idComanda" />
+            </Principal>
+            <Dependent Role="ComandaDefectiune">
+              <PropertyRef Name="idComanda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_defectiune">
+          <End Role="defectiune" Type="Self.defectiune" Multiplicity="1" />
+          <End Role="ComandaDefectiune" Type="Self.ComandaDefectiune" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="defectiune">
+              <PropertyRef Name="idDefectiune" />
+            </Principal>
+            <Dependent Role="ComandaDefectiune">
+              <PropertyRef Name="idDefectiune" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Telefon">
+          <End Role="telefon" Type="Self.telefon" Multiplicity="0..1" />
+          <End Role="Comanda" Type="Self.Comanda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="telefon">
+              <PropertyRef Name="idTelefon" />
+            </Principal>
+            <Dependent Role="Comanda">
+              <PropertyRef Name="idTelefon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MobileRepairs1ModelStoreContainer">
+          <EntitySet Name="client" EntityType="Self.client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comanda" EntityType="Self.Comanda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ComandaDefectiune" EntityType="Self.ComandaDefectiune" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="defectiune" EntityType="Self.defectiune" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="telefon" EntityType="Self.telefon" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Client" Association="Self.FK_Client">
+            <End Role="client" EntitySet="client" />
+            <End Role="Comanda" EntitySet="Comanda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comanda" Association="Self.FK_Comanda">
+            <End Role="Comanda" EntitySet="Comanda" />
+            <End Role="ComandaDefectiune" EntitySet="ComandaDefectiune" />
+          </AssociationSet>
+          <AssociationSet Name="FK_defectiune" Association="Self.FK_defectiune">
+            <End Role="defectiune" EntitySet="defectiune" />
+            <End Role="ComandaDefectiune" EntitySet="ComandaDefectiune" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Telefon" Association="Self.FK_Telefon">
+            <End Role="telefon" EntitySet="telefon" />
+            <End Role="Comanda" EntitySet="Comanda" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MobileRepairs1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MobileRepairs1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="client" EntityType="MobileRepairs1Model.client" />
+          <EntitySet Name="Comanda" EntityType="MobileRepairs1Model.Comanda" />
+          <EntitySet Name="defectiune" EntityType="MobileRepairs1Model.defectiune" />
+          <EntitySet Name="employee" EntityType="MobileRepairs1Model.employee" />
+          <EntitySet Name="sysdiagrams" EntityType="MobileRepairs1Model.sysdiagrams" />
+          <EntitySet Name="telefon" EntityType="MobileRepairs1Model.telefon" />
+          <AssociationSet Name="FK_Client" Association="MobileRepairs1Model.FK_Client">
+            <End Role="client" EntitySet="client" />
+            <End Role="Comanda" EntitySet="Comanda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Telefon" Association="MobileRepairs1Model.FK_Telefon">
+            <End Role="telefon" EntitySet="telefon" />
+            <End Role="Comanda" EntitySet="Comanda" />
+          </AssociationSet>
+          <AssociationSet Name="ComandaDefectiune" Association="MobileRepairs1Model.ComandaDefectiune">
+            <End Role="Comanda" EntitySet="Comanda" />
+            <End Role="defectiune" EntitySet="defectiune" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="idClient" />
+          </Key>
+          <Property Name="idClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nume" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adresa" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comanda" Relationship="MobileRepairs1Model.FK_Client" FromRole="client" ToRole="Comanda" />
+        </EntityType>
+        <EntityType Name="Comanda">
+          <Key>
+            <PropertyRef Name="idComanda" />
+          </Key>
+          <Property Name="idComanda" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idClient" Type="Int32" />
+          <Property Name="idEmployee" Type="Int32" />
+          <Property Name="idTelefon" Type="Int32" />
+          <Property Name="idUnicTelefon" Type="Int32" Nullable="false" />
+          <Property Name="stare" Type="Boolean" />
+          <Property Name="DataDeschidere" Type="DateTime" Precision="0" />
+          <Property Name="DataInchidere" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="client" Relationship="MobileRepairs1Model.FK_Client" FromRole="Comanda" ToRole="client" />
+          <NavigationProperty Name="telefon" Relationship="MobileRepairs1Model.FK_Telefon" FromRole="Comanda" ToRole="telefon" />
+          <NavigationProperty Name="defectiune" Relationship="MobileRepairs1Model.ComandaDefectiune" FromRole="Comanda" ToRole="defectiune" />
+        </EntityType>
+        <EntityType Name="defectiune">
+          <Key>
+            <PropertyRef Name="idDefectiune" />
+          </Key>
+          <Property Name="idDefectiune" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nume" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cost" Type="Int32" />
+          <NavigationProperty Name="Comanda" Relationship="MobileRepairs1Model.ComandaDefectiune" FromRole="defectiune" ToRole="Comanda" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="idEmployee" />
+          </Key>
+          <Property Name="idEmployee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="telefon">
+          <Key>
+            <PropertyRef Name="idTelefon" />
+          </Key>
+          <Property Name="idTelefon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comanda" Relationship="MobileRepairs1Model.FK_Telefon" FromRole="telefon" ToRole="Comanda" />
+        </EntityType>
+        <Association Name="FK_Client">
+          <End Type="MobileRepairs1Model.client" Role="client" Multiplicity="0..1" />
+          <End Type="MobileRepairs1Model.Comanda" Role="Comanda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="Comanda">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Telefon">
+          <End Type="MobileRepairs1Model.telefon" Role="telefon" Multiplicity="0..1" />
+          <End Type="MobileRepairs1Model.Comanda" Role="Comanda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="telefon">
+              <PropertyRef Name="idTelefon" />
+            </Principal>
+            <Dependent Role="Comanda">
+              <PropertyRef Name="idTelefon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ComandaDefectiune">
+          <End Type="MobileRepairs1Model.Comanda" Role="Comanda" Multiplicity="*" />
+          <End Type="MobileRepairs1Model.defectiune" Role="defectiune" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MobileRepairs1ModelStoreContainer" CdmEntityContainer="MobileRepairs1Entities">
+          <EntitySetMapping Name="client">
+            <EntityTypeMapping TypeName="MobileRepairs1Model.client">
+              <MappingFragment StoreEntitySet="client">
+                <ScalarProperty Name="adresa" ColumnName="adresa" />
+                <ScalarProperty Name="nume" ColumnName="nume" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comanda">
+            <EntityTypeMapping TypeName="MobileRepairs1Model.Comanda">
+              <MappingFragment StoreEntitySet="Comanda">
+                <ScalarProperty Name="DataInchidere" ColumnName="DataInchidere" />
+                <ScalarProperty Name="DataDeschidere" ColumnName="DataDeschidere" />
+                <ScalarProperty Name="stare" ColumnName="stare" />
+                <ScalarProperty Name="idUnicTelefon" ColumnName="idUnicTelefon" />
+                <ScalarProperty Name="idTelefon" ColumnName="idTelefon" />
+                <ScalarProperty Name="idEmployee" ColumnName="idEmployee" />
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+                <ScalarProperty Name="idComanda" ColumnName="idComanda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="defectiune">
+            <EntityTypeMapping TypeName="MobileRepairs1Model.defectiune">
+              <MappingFragment StoreEntitySet="defectiune">
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="nume" ColumnName="nume" />
+                <ScalarProperty Name="idDefectiune" ColumnName="idDefectiune" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employee">
+            <EntityTypeMapping TypeName="MobileRepairs1Model.employee">
+              <MappingFragment StoreEntitySet="employee">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="idEmployee" ColumnName="idEmployee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MobileRepairs1Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="telefon">
+            <EntityTypeMapping TypeName="MobileRepairs1Model.telefon">
+              <MappingFragment StoreEntitySet="telefon">
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="brand" ColumnName="brand" />
+                <ScalarProperty Name="idTelefon" ColumnName="idTelefon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ComandaDefectiune" TypeName="MobileRepairs1Model.ComandaDefectiune" StoreEntitySet="ComandaDefectiune">
+            <EndProperty Name="defectiune">
+              <ScalarProperty Name="idDefectiune" ColumnName="idDefectiune" />
+            </EndProperty>
+            <EndProperty Name="Comanda">
+              <ScalarProperty Name="idComanda" ColumnName="idComanda" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
