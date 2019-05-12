@@ -1,0 +1,109 @@
+<h2 class="my-2">Telefoane</h2>
+
+<div class="row">
+  <div class="col-sm-12 offset-md-1 col-md-10 offset-md-1 offset-lg-2 col-lg-8 offset-lg-2 ">
+    <div class="list-group my-2">
+      <div class="list-group-item" *ngFor="let telefon of telefonList"
+           [class.selected]="telefon === telefonSelected"
+           (click)="onSelect(telefon)">
+        <span>Id: {{telefon.IdTelefon}} | Marca: {{telefon.Marca}} | Brand: {{telefon.Brand}}</span>
+      </div>
+    </div>
+
+    <div *ngIf="telefonSelected" class="my-2">
+      <h2>
+        {{telefonSelected.Marca | uppercase}}  {{telefonSelected.Brand}} was selected
+      </h2>
+    </div>
+
+    <div class="text-center">
+      <button type="button" class="btn btn-outline-danger mx-2 my-3" (click)="blabla ='add' ">Adauga telefon</button>
+      <button type="button" class="btn btn-outline-danger mx-2 my-3" (click)="deleteTelefon()">Sterge telefon</button>
+      <button type="button" class="btn btn-outline-danger mx-2 my-3" (click)="blabla ='edit'">Editeaza telefon</button>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="blabla == 'add' ">
+  <div class="row">
+    <div class="col-sm-12 offset-md-1 col-md-10 offset-md-1 offset-lg-2 col-lg-8 offset-lg-2 ">
+      <div class="form-group">
+        <label for="marca">Marca: </label>
+        <input #marca type="text" class="form-control" id="marca">
+      </div>
+      <div class="form-group">
+        <label for="brand">Brand: </label>
+        <input #brand type="text" class="form-control" id="brand">
+        <button type="button" class="btn btn-outline-danger my-3" (click)="addTelefon(marca.value, brand.value)">Salveaza</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="blabla == 'edit' ">
+  <div class="row">
+    <div class="col-sm-12 offset-md-1 col-md-10 offset-md-1 offset-lg-2 col-lg-8 offset-lg-2 ">
+      <div class="form-group">
+        <label for="marcaEdit">Marca: </label>
+        <input #marcaEdit type="text" class="form-control" id="marcaEdit">
+      </div>
+      <div class="form-group">
+        <label for="brandEdit">Brand: </label>
+        <input #brandEdit type="text" class="form-control" id="brandEdit">
+        <button type="button" class="btn btn-outline-danger my-3" (click)="editTelefon(marcaEdit.value, brandEdit.value)">
+          Salveaza
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--<ol class="telefoane">
+  <li *ngFor="let telefon of telefonList "
+      [class.selected]="telefon === telefonSelected"
+      (click)="onSelect(telefon)">
+    {{telefon.IdTelefon}} {{telefon.Brand}} {{telefon.Marca}}
+  </li>
+</ol>
+
+<div *ngIf="telefonSelected">
+  <h2>
+    {{telefonSelected.Marca | uppercase}}  {{telefonSelected.Brand}} was selected
+  </h2>
+
+</div>
+<div *ngIf="blabla == 'add' ">
+  <div class="form-group">
+    <label for="marca">Marca: </label>
+    <input #marca type="text" class="form-control" id="marca">
+  </div>
+  <div class="form-group">
+    <label for="brand">Brand: </label>
+    <input #brand type="text" class="form-control" id="brand">
+    <button type="button" class="btn btn-primary " (click)="addTelefon(marca.value,brand.value)"> Submit</button>
+  </div>
+</div>
+
+
+<div *ngIf="blabla == 'edit' ">
+  <div class="form-group">
+    <label for="marcaEdit">Marca: </label>
+    <input #marcaEdit type="text" class="form-control" id="marcaEdit">
+  </div>
+  <div class="form-group">
+    <label for="brandEdit">Brand: </label>
+    <input #brandEdit type="text" class="form-control" id="brandEdit">
+    <button type="button" class="btn btn-primary " (click)="editTelefon(marcaEdit.value,brandEdit.value)">
+      Submit
+    </button>
+  </div>
+</div>
+
+
+<button type="button" class="btn btn-primary" (click)="blabla ='add' ">Add telefon</button>
+<button type="button" class="btn btn-primary" (click)="deleteTelefon()">Delete telefon</button>
+<button type="button" class="btn btn-primary" (click)="blabla ='edit'">Edit telefon</button>-->
+

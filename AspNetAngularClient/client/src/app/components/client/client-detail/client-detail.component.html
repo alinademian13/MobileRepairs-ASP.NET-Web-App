@@ -1,0 +1,113 @@
+<!--<div class="container-fluid">-->
+  <!--<div style="text-align:center" class="row">
+
+    <div class="col-12" *ngIf="client">
+
+      <h5> Email:{{client.Email}}| Nume: {{client.Nume}}| Adresa: {{client.Adresa}}</h5>
+      <h3>Lista de comenzi</h3>
+      <ol class="comenzi">
+        <li *ngFor="let comanda of comandaList "
+            [class.selected]="comanda === comandaSelected"
+            (click)="onSelectComanda(comanda)">
+          {{comanda.ClientName}} {{comanda.EmployeeName}} {{comanda.idUnicTelefon}}{{comanda.Telefon}}{{comanda.stare}}{{comanda.DataDeschidere}}{{comanda.DataInchidere}}
+        </li>
+      </ol>
+      <form *ngIf="editing">
+        <label>Email:</label>
+        <input type="text" #email placeholder="Email" ng-required/>
+        <label>Nume:</label>
+        <input type="text" #nume placeholder="Nume" ng-required/>
+        <label>Adresa:</label>
+        <input type="text" #adresa placeholder="Adresa" ng-required/>
+        <br/>
+        <button class="btn" type="submit" (click)="saveClient(client.ID_Client,nume.value,email.value,adresa.value)">
+          Save
+        </button>
+
+      </form>
+      <button class="btn btn-primary" style="float:right" (click)="editClient()">Edit</button>
+      <button class="btn btn-primary" style="float:right" (click)="deleteClient(client.ID_Client)">Delete</button>
+      <button class="btn btn-primary" style="float:right" (click)="addButton()">Add comanda</button>
+
+    </div>
+  </div>-->
+
+
+  <div *ngIf="client">
+
+    <h5 class="my-2"> Email: {{client.Email}} | Nume: {{client.Nume}} | Adresa: {{client.Adresa}}</h5>
+
+
+    <form *ngIf="editing" class="my-4">
+      <label class="mr-2">Email:</label>
+      <input type="text" #email placeholder="Email" ng-required />
+      <label class="mx-2">Nume:</label>
+      <input type="text" #nume placeholder="Nume" ng-required />
+      <label class="mx-2">Adresa:</label>
+      <input type="text" #adresa placeholder="Adresa" ng-required />
+      <br />
+      <button class="btn btn-outline-danger my-2" type="submit" (click)="saveClient(client.ID_Client,nume.value,email.value,adresa.value)">
+        Save
+      </button>
+
+    </form>
+    <button class="btn btn-outline-danger float-left my-1 mr-2" (click)="editClient()">Edit</button>
+    <button class="btn btn-outline-danger float-left my-1 mx-2" (click)="deleteClient(client.ID_Client)">Delete</button>
+    <button class="btn btn-outline-danger float-left my-1 mx-2" (click)="goBack()">Back</button>
+    <button class="btn btn-outline-danger float-left my-1 mx-2" (click)="addButton()">Add comanda</button>
+
+  </div>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-4">
+    </div>
+    <div class="col-4" *ngIf="comanda">
+
+      <form>
+
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Alege angajat</label>
+          <select name="employee" class="form-control" id="exampleFormControlSelect1" [(ngModel)]="employeeSelected" >
+            <option *ngFor="let employee of employeeList" [ngValue]="employee"
+                    [class.selected]="employee === employeeSelected"
+                    (select)="onSelect(employee)"> {{employee.idEmployee}}{{employee.Name}}</option>
+          </select>
+          <div> ati selectat : {{employeeSelected.idEmployee | json}}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Alege tip telefon</label>
+          <select name="telefon" class="form-control" id="exampleFormControlSelect2" [(ngModel)]="telefonSelected">
+            <option *ngFor="let telefon of telefonList" [ngValue]="telefon"
+                    [class.selected]="telefon === telefonSelected"
+                    (click)="onSelectTelefon(telefon)"> {{telefon.Marca}} {{telefon.Brand}}</option>
+
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Id unic telefon</label>
+          <input #idUnicTelefon type="text" class="form-control" id="exampleFormControlInput1"
+                 placeholder="xxxzzz438763878">
+        </div>
+        <label>Data deschidere</label>
+        <ngbd-datepicker-popup (voted)="onSelectDateDeschidere($event)"></ngbd-datepicker-popup>
+        Inchideti comanda <input type="checkbox" (click)="checkebox()">
+        <div *ngIf="stare">
+          <label>Data inchidere</label>
+          <ngbd-datepicker-popup (voted)="onSelectDateInchidere($event)"></ngbd-datepicker-popup>
+        </div>
+        <button class="btn btn-primary" style="float:right"
+                (click)="submit()">
+          Submit
+        </button>
+      </form>
+
+    </div>
+
+    <div class="col-4">
+    </div>
+  </div>
+</div>
+

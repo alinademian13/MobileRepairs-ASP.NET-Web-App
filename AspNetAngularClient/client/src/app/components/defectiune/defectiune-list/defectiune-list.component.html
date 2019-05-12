@@ -1,0 +1,34 @@
+<h2 class="my-2">Defectiuni</h2>
+
+<div class="row">
+  <div class="col-sm-12 offset-md-1 col-md-10 offset-md-1 offset-lg-2 col-lg-8 offset-lg-2 ">
+    <div class="list-group defectiuni">
+      <div class="list-group-item" *ngFor="let defectiune of defectiuni; let i = index"
+           [class.selected]="defectiune === selectedDefectiune"
+           (click)="onSelect(defectiune, i)">
+
+        <span [hidden]="defectiune === selectedDefectiune">Nume: {{defectiune.Nume}}   |    Cost: {{defectiune.Cost}}</span>
+
+        <form *ngIf="defectiune === selectedDefectiune">
+          <label class="mx-2">Nume:</label>
+          <input type="text" #Nume placeholder="Nume" [value]="selectedDefectiune.Nume" />
+          <label class="mx-2">Cost:</label>
+          <input type="text" #Cost placeholder="Cost" [value]="selectedDefectiune.Cost" />
+          <button class="btn btn-outline-danger float-right" type="submit" (click)="update(defectiune.Id, Nume.value, Cost.value)">Salveaza</button>
+        </form>
+
+      </div>
+    </div>
+
+    <hr />
+
+    <div *ngIf="selectedDefectiune" class="delete-btn float-right">
+      <button (click)="delete()" type="button" class="btn btn-outline-danger px-3 my-2">Sterge defectiune</button>
+    </div>
+    <div class="text-center">
+      <button (click)="goToAdd()" type="button" class="btn btn-outline-danger my-2">Adauga defectiune</button>
+    </div>
+  </div>
+</div>
+
+

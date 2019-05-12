@@ -1,0 +1,79 @@
+<h2 class="my-2">Clienti</h2>
+
+<div class="row mb-5">
+  <div class="col-sm-12 offset-md-2 col-md-8 offset-md-2 offset-lg-3 col-lg-6 offset-lg-3 ">
+    <button class="btn btn-outline-danger my-3 float-right" (click)="addClient()">Adauga client</button>
+    <div class="my-3">
+
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control search-client-input w-75 mr-2" [(ngModel)]="filter" placeholder="Cauta clienti" />
+        <button class="btn btn-outline-secondary" type="submit" (click)="search()">Cauta</button>
+      </form>
+
+    </div>
+
+    <div class="list-group">
+      <div class="list-group-item" *ngFor="let client of clients">
+        <img src="http://warac.co.za/wp-content/uploads/2016/06/Placeholder_Person.jpg" style="height:80px;width:80px" />
+
+        <span>Id: {{client.ID_Client}} | Email: {{client.Email}} | Nume: {{client.Nume}} </span>
+
+        <button class="btn btn-outline-danger float-right" (click)="gotoDetail(client)">Details</button>
+      </div>
+    </div>
+
+    <div class="text-center my-3">
+        <ul class="pagination pagination-centered justify-content-center">
+          <li class="page-item">
+            <button (click)="prevPage()" class="page-link text-danger">
+              <span aria-hidden="true">&laquo;</span>
+            </button>
+          </li>
+          <li class="page-item">
+            <span class="page-link text-danger">
+              {{page + 1}}  out of {{ count}} items
+            </span>
+          </li>
+          <li class="page-item">
+            <button (click)="nextPage()" class="page-link text-danger">
+              <span aria-hidden="true">&raquo;</span>
+            </button>
+          </li>
+        </ul>
+    </div>
+  
+  </div>
+
+</div>
+
+<!--<div class="row" style="margin-top:30px">
+  <div class="offset-md-2 col-md-6">
+    <button class="btn btn-primary" style="float:right" (click)="addClient()">Add</button>
+    <div class="input-group">
+      <input class="form-control" [(ngModel)]="filter" placeholder="Search clients" />
+      <div class="input-group-append">
+        <span class="input-group-text"><i class="fas fa-search" (click)="search()"></i></span>
+      </div>
+    </div>
+
+    <div class="list-group">
+      <div class="list-group-item" *ngFor="let client of clients">
+        <img src="http://warac.co.za/wp-content/uploads/2016/06/Placeholder_Person.jpg" style="height:80px;width:80px" />
+
+        <span>Id:{{client.ID_Client}}Email:{{client.Email}}|Nume: {{client.Nume}} </span>
+
+        <button class="btn btn-primary" style="float:right" (click)="gotoDetail(client)">Details</button>
+      </div>
+    </div>
+    <span>
+      <button (click)="prevPage()"><i class="fas fa-angle-left"></i></button>
+      {{page + 1}}  out of {{ count}} items <button (click)="nextPage()">
+        <i class="fas fa-angle-right"></i>
+      </button>
+    </span>
+  </div>
+
+</div>-->
+
+
+

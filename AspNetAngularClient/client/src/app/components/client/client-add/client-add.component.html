@@ -1,0 +1,56 @@
+<h2 class="my-2">Adauga un nou client</h2>
+
+<div class="container-fluid">
+
+  <table class="table table-hover my-4">
+    <tr>
+      <td><label>Nume:</label></td>
+      <td><input #nume></td>
+
+    </tr>
+    <tr>
+      <td><label>Email:</label></td>
+      <td><input #email></td>
+
+    </tr>
+    <tr>
+      <td><label>Adresa:</label></td>
+      <td><input #adresa></td>
+
+    </tr>
+  </table>
+
+  <div class="text-center my-2">
+    <button (click)="addClient(nume.value, email.value,adresa.value)" type="button" class="btn btn-outline-danger">
+      Adauga
+    </button>
+  </div>
+  <div class="text-center">
+    <button (click)="goBack()" type="button" class="btn btn-outline-danger">Back</button>
+  </div>
+
+</div>
+
+<!--<table>
+  <tr>
+    <td><label>Nume:</label></td>
+    <td><input #nume></td>
+
+  </tr>
+  <tr>
+    <td><label>Email:</label></td>
+    <td><input #email></td>
+
+  </tr>
+  <tr>
+    <td><label>Adresa:</label></td>
+    <td><input #adresa></td>
+
+  </tr>
+</table>
+
+<div class="save-btn">
+  <button (click)="addClient(nume.value, email.value,adresa.value)" type="button" class="btn btn-outline-danger">
+    Adauga
+  </button>
+</div>-->

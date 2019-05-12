@@ -1,0 +1,25 @@
+<h1 class="my-2">Adauga Defectiune:</h1>
+
+<div class="container-fluid">
+
+  <table class="table table-hover my-4">
+    <tr>
+      <td><label>Nume:</label></td>
+      <td><input #nume></td>
+    </tr>
+    <tr>
+      <td><label>Cost:</label></td>
+      <td><input #cost></td>
+    </tr>
+
+  </table>
+
+  <div class="text-center my-2">
+    <button (click)="add(nume.value, cost.value)" type="button" class="btn btn-outline-danger">Adauga</button>
+  </div>
+
+  <div class="text-center">
+    <button (click)="goBack()" type="button" class="btn btn-outline-danger">Back</button>
+  </div>
+
+</div>
