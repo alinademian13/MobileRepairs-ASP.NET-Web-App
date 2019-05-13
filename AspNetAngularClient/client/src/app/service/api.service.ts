@@ -58,14 +58,24 @@ export class ApiService {
   addComanda(idClient: number, idEmployee: number, idTelefon: number,
              idUnicTelefon: number, stare: boolean, DataDeschidere: any, DataInchidere: any) {
 
-    const Time = DataDeschidere + ' ' + '00' + ':' + '00' as string;
-    console.log(Time);
+    const DataDeschidere1 = DataDeschidere + ' ' + '00' + ':' + '00' as string;
+    console.log(DataDeschidere1);
 
-    const Time1 = DataInchidere + ' ' + '00' + ':' + '00' as string;
+    const DataInchidere1 = DataInchidere + ' ' + '00' + ':' + '00' as string;
 
     //  "yyyy-MM-dd HH:mm"
 
-    const comanda = {idClient, idEmployee, idTelefon, idUnicTelefon, stare, Time, Time1} as ComandaDto;
-    return this.http.post<String>(environment.apiurl + '/Comanda/AddComanda', comanda).toPromise();
+
+    const comanda = {
+      idClient,
+      idEmployee,
+      idTelefon,
+      idUnicTelefon,
+      stare,
+      DataDeschidere,
+      DataInchidere
+    } as ComandaDto;
+
+    return this.http.post(environment.apiurl + '/Comanda/AddComanda', comanda).toPromise();
   }
 }

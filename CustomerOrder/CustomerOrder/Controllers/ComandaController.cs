@@ -5,6 +5,7 @@ using CustomerOrder.Service.DTO;
 using CustomerOrder.Service.CustomerOrder.Service.DTO;
 using System;
 using System.Globalization;
+using Newtonsoft.Json;
 
 namespace CustomerOrder.Controllers
 {
@@ -25,16 +26,16 @@ namespace CustomerOrder.Controllers
         }
         [HttpPost]
 
-        public IHttpActionResult AddComanda([FromBody] AddComandaDto addComandaDto) { 
-  
+        public IHttpActionResult AddComanda([FromBody] AddComandaDto addComandaDto1) {
+
             DAL.Comanda cm = new DAL.Comanda();
-            cm.idClient = addComandaDto.idClient;
-            cm.idEmployee = addComandaDto.idEmployee;
-            cm.idTelefon = addComandaDto.idTelefon;
-            cm.idUnicTelefon = addComandaDto.idUnicTelefon;
-            cm.stare = addComandaDto.stare;
-            cm.DataDeschidere = DateTime.ParseExact(addComandaDto.DataDeschidere, "yyyy-MM-dd H:m", CultureInfo.InvariantCulture);
-            cm.DataInchidere = DateTime.ParseExact(addComandaDto.DataInchidere, "yyyy-MM-dd H:m", CultureInfo.InvariantCulture);
+            cm.idClient = addComandaDto1.idClient;
+            cm.idEmployee = addComandaDto1.idEmployee;
+            cm.idTelefon = addComandaDto1.idTelefon;
+            cm.idUnicTelefon = addComandaDto1.idUnicTelefon;
+            cm.stare = addComandaDto1.stare;
+            cm.DataDeschidere = DateTime.ParseExact(addComandaDto1.DataDeschidere, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            cm.DataInchidere = DateTime.ParseExact(addComandaDto1.DataInchidere, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             return Ok(comandaService.AddComanda(cm));
         }
         [HttpPut]

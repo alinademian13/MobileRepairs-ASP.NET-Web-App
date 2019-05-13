@@ -11,6 +11,7 @@ import {error} from '@angular/compiler/src/util';
 import {ComandaDto} from '../../../shared/DTOs/ComandaDto';
 import {NavbarService} from '../../../service/navbar.service';
 import {NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+import {ComandaDtoList} from "../../../shared/DTOs/ComandaDtoList";
 
 
 @Component({
@@ -20,7 +21,7 @@ import {NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ClientDetailComponent implements OnInit {
   comandaSelected: ComandaDto = new ComandaDto();
-  comandaList: Array<ComandaDto>
+  comandaList: Array<ComandaDtoList>
   employeeList: Array<EmployeeId>
   client: ClientDTO = new ClientDTO();
   editing: boolean = false;
@@ -65,6 +66,7 @@ export class ClientDetailComponent implements OnInit {
   getComandaList(id: number) {
     this.apiService.getComandaById(id).then(
       comandaList => this.comandaList = comandaList,
+
       error1 => this.errorMessage = error1 as any
     );
 
