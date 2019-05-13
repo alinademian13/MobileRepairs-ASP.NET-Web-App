@@ -10,6 +10,7 @@ import {TelefonService} from '../../../service/telefon.service';
 import {error} from '@angular/compiler/src/util';
 import { ComandaDto } from '../../../shared/DTOs/ComandaDto';
 import { NavbarService } from '../../../service/navbar.service';
+import { NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -30,11 +31,11 @@ export class ClientDetailComponent implements OnInit {
   employeeSelected: EmployeeId = new EmployeeId();
   telefonList: Array<Telefon>
   telefonSelected: Telefon = new Telefon();
-  selectedDateDeschidere: Date;
+  selectedDateDeschidere: NgbDate;
   selectedDateInchidere: Date;
 
 
-  constructor(private clientService: ClientService, private router: Router, private route: ActivatedRoute, private apiService: ApiService, private telefonService: TelefonService, private nav: NavbarService) {
+  constructor(private clientService: ClientService, private router: Router, private route: ActivatedRoute, private apiService: ApiService, private telefonService: TelefonService, private nav: NavbarService, private ngbDateParserFormatter: NgbDateParserFormatter) {
 
     this.route.queryParams.subscribe(params => {
 
@@ -139,7 +140,8 @@ export class ClientDetailComponent implements OnInit {
     this.stare = true;
   }
 
-  onSelectDateDeschidere($event: Date) {
+  onSelectDateDeschidere($event: NgbDate) {
+    console.log($event);
     this.selectedDateDeschidere = $event;
   }
 
@@ -148,6 +150,9 @@ export class ClientDetailComponent implements OnInit {
   }
 
   submit() {
+
+    console.log(this.ngbDateParserFormatter.format(this.selectedDateDeschidere));
+
     this.apiService.addComanda(0, 0, 0, 0, true, this.selectedDateDeschidere, this.selectedDateInchidere).then(r => {
 
     },err => {
