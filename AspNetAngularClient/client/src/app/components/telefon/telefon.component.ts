@@ -4,6 +4,7 @@ import {Telefon} from '../../shared/Models/telefon';
 import {ActivatedRoute, Router, Params} from '@angular/router';
 import { TelefonDto } from '../../shared/DTOs/TelefonDto';
 import { NavbarService } from '../../service/navbar.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-telefon',
@@ -20,7 +21,7 @@ export class TelefonComponent implements OnInit {
   telefonUpdate: TelefonDto
   blabla: string
 
-  constructor(private service: TelefonService, private router: Router, private route: ActivatedRoute, private nav: NavbarService) {
+  constructor(private service: TelefonService, private router: Router, private route: ActivatedRoute, private nav: NavbarService, private location: Location) {
   }
 
   ngOnInit(): void {
@@ -47,8 +48,8 @@ export class TelefonComponent implements OnInit {
     this.service.addTelefon(Marca, Brand).then(ras => {
       this.msg = ras;
       if (this.msg === 'adaugat') {
-
-        this.router.navigate(['telefon']);
+        window.location.reload();
+        //this.router.navigate(['telefon']);
       } else {
         console.log(this.msg);
       }
