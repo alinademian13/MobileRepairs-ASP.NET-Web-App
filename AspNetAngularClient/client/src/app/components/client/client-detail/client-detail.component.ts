@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { ClientDTO } from '../../../shared/DTOs/ClientDTO';
+import {ClientDTO} from '../../../shared/DTOs/ClientDTO';
 import {ClientService} from '../../../service/client.service';
 import {ApiService} from '../../../service/api.service';
-import { EmployeeId } from '../../../shared/Models/employeeId';
-import { TelefonDto } from '../../../shared/DTOs/TelefonDto';
-import { Telefon } from '../../../shared/Models/telefon';
+import {EmployeeId} from '../../../shared/Models/employeeId';
+import {TelefonDto} from '../../../shared/DTOs/TelefonDto';
+import {Telefon} from '../../../shared/Models/telefon';
 import {TelefonService} from '../../../service/telefon.service';
 import {error} from '@angular/compiler/src/util';
-import { ComandaDto } from '../../../shared/DTOs/ComandaDto';
-import { NavbarService } from '../../../service/navbar.service';
-import { NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import {ComandaDto} from '../../../shared/DTOs/ComandaDto';
+import {NavbarService} from '../../../service/navbar.service';
+import {NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -32,8 +32,8 @@ export class ClientDetailComponent implements OnInit {
   telefonList: Array<Telefon>
   telefonSelected: Telefon = new Telefon();
   selectedDateDeschidere: NgbDate;
-  selectedDateInchidere: Date;
-
+  selectedDateInchidere: NgbDate;
+  idUnicTelefon: number;
 
   constructor(private clientService: ClientService, private router: Router, private route: ActivatedRoute, private apiService: ApiService, private telefonService: TelefonService, private nav: NavbarService, private ngbDateParserFormatter: NgbDateParserFormatter) {
 
@@ -117,7 +117,7 @@ export class ClientDetailComponent implements OnInit {
   }
 
   // goBack(): void {
-  //  this.location.back();
+  // this.location.back();
   // }
 
   // save(): void {
@@ -145,17 +145,18 @@ export class ClientDetailComponent implements OnInit {
     this.selectedDateDeschidere = $event;
   }
 
-  onSelectDateInchidere($event: Date) {
+  onSelectDateInchidere($event: NgbDate) {
     this.selectedDateInchidere = $event;
   }
 
   submit() {
 
     console.log(this.ngbDateParserFormatter.format(this.selectedDateDeschidere));
+    const selectedDateD = this.ngbDateParserFormatter.format(this.selectedDateDeschidere)
+    const selectedDateI = this.ngbDateParserFormatter.format(this.selectedDateInchidere)
+    this.apiService.addComanda(this.client.ID_Client, this.employeeSelected.idEmployee, this.telefonSelected.IdTelefon, this.idUnicTelefon, true, selectedDateD, selectedDateI).then(r => {
 
-    this.apiService.addComanda(0, 0, 0, 0, true, this.selectedDateDeschidere, this.selectedDateInchidere).then(r => {
-
-    },err => {
+    }, err => {
 
     })
   }

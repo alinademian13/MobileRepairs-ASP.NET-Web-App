@@ -14,8 +14,8 @@ namespace CustomerOrder.Service.DTO
         public Nullable<int> idTelefon { get; set; }
         public int idUnicTelefon { get; set; }
         public Nullable<bool> stare { get; set; }
-        public Nullable<Date> DataDeschidere { get; set; }
-        public Nullable<Date> DataInchidere { get; set; }
+        public String DataDeschidere { get; set; }
+        public String DataInchidere { get; set; }
       //  public HashSet<CustomerOrder.Service.DTO.ResponseDefectiuneDto> DefectiuneDtos { get; set; }
     }
 }

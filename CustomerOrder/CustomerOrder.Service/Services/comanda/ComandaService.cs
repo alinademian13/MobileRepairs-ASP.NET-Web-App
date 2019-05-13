@@ -25,9 +25,9 @@ namespace CustomerOrder.Service.Services.comanda
                                 where employee.idEmployee == x.idEmployee
                                 select employee.Name).FirstOrDefault(),
 
-                Telefon = (from telefon in DbContext.telefon
-                           where telefon.idTelefon == x.idTelefon
-                           select (AddTelefonDto)telefon).FirstOrDefault(),
+              //  Telefon = (from telefon in DbContext.telefon
+                //           where telefon.idTelefon == x.idTelefon
+                  //         select (AddTelefonDto)telefon).FirstOrDefault(),
                 idUnicTelefon = x.idUnicTelefon,
                 stare = x.stare,
                 DataDeschidere = x.DataDeschidere,

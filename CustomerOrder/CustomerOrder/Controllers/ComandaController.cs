@@ -25,16 +25,16 @@ namespace CustomerOrder.Controllers
         }
         [HttpPost]
 
-        public IHttpActionResult AddComanda([FromUri] int idClient, [FromUri] int idEmployee, [FromUri] int idTelefon, [FromUri] int idUnicTelefon, [FromUri] bool stare, [FromUri] string DataDeschidere, [FromUri] string DataInchidere)
-        {
+        public IHttpActionResult AddComanda([FromBody] AddComandaDto addComandaDto) { 
+  
             DAL.Comanda cm = new DAL.Comanda();
-            cm.idClient = idClient;
-            cm.idEmployee = idEmployee;
-            cm.idTelefon = idTelefon;
-            cm.idUnicTelefon = idUnicTelefon;
-            cm.stare = stare;
-            cm.DataDeschidere = DateTime.ParseExact(DataDeschidere, "d/M/yyyy h:mm", CultureInfo.InvariantCulture);
-            cm.DataInchidere = DateTime.ParseExact(DataInchidere, "d/M/yyyy h:mm", CultureInfo.InvariantCulture);
+            cm.idClient = addComandaDto.idClient;
+            cm.idEmployee = addComandaDto.idEmployee;
+            cm.idTelefon = addComandaDto.idTelefon;
+            cm.idUnicTelefon = addComandaDto.idUnicTelefon;
+            cm.stare = addComandaDto.stare;
+            cm.DataDeschidere = DateTime.ParseExact(addComandaDto.DataDeschidere, "yyyy-MM-dd H:m", CultureInfo.InvariantCulture);
+            cm.DataInchidere = DateTime.ParseExact(addComandaDto.DataInchidere, "yyyy-MM-dd H:m", CultureInfo.InvariantCulture);
             return Ok(comandaService.AddComanda(cm));
         }
         [HttpPut]

@@ -53,8 +53,17 @@
         </form>
         <button class="btn btn-outline-danger float-left my-1 mr-2" (click)="editClient()">Edit</button>
         <button class="btn btn-outline-danger float-left my-1 mx-2" (click)="deleteClient(client.ID_Client)">Delete</button>
-        <button class="btn btn-outline-danger float-left my-1 mx-2" (click)="goBack()">Back</button>
+       <!-- <button class="btn btn-outline-danger float-left my-1 mx-2" (click)="goBack()">Back</button> -->
         <button class="btn btn-outline-danger float-left my-1 mx-2" (click)="addButton()">Add comanda</button>
+
+        <h3>Lista de comenzi</h3>
+        <ol class="comenzi">
+          <li *ngFor="let comanda of comandaList "
+              [class.selected]="comanda === comandaSelected"
+              (click)="onSelectComanda(comanda)">
+            {{comanda.ClientName}} {{comanda.EmployeeName}} {{comanda.idUnicTelefon}}{{comanda.Telefon}}{{comanda.stare}}{{comanda.DataDeschidere}}{{comanda.DataInchidere}}
+          </li>
+        </ol>
 
       </div>
 
@@ -91,7 +100,7 @@
           </div>
           <div class="form-group">
             <label for="exampleFormControlInput1">Id unic telefon</label>
-            <input #idUnicTelefon type="text" class="form-control" id="exampleFormControlInput1"
+            <input [(ngModel)]="idUnicTelefon" name="idUnicTelefon" type="text" class="form-control" id="exampleFormControlInput1"
                    placeholder="xxxzzz438763878">
           </div>
           <label>Data deschidere</label>
@@ -105,7 +114,8 @@
           Inchideti comanda <input type="checkbox" (click)="checkebox()">
           <div *ngIf="stare">
             <label>Data inchidere</label>
-            <ngbd-datepicker-popup (voted)="onSelectDateInchidere($event)"></ngbd-datepicker-popup>
+            <input type="text" name="startDate" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="selectedDateInchidere" />
+            <button (click)="d.toggle()">&dArr;</button>
           </div>
           <button class="btn btn-primary" style="float:right"
                   (click)="submit()">

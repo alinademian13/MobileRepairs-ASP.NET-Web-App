@@ -1,11 +1,10 @@
 import {TelefonDto} from './TelefonDto';
 
-export class ComandaDto {
-
-
+export class ComandaDtoList {
+  idComanda: number;
   idClient: number;
-  idEmployee: number;
-  idTelefon: number;
+  ClientName: string;
+  EmployeeName: string;
   Telefon: TelefonDto;
   idUnicTelefon: number;
   stare: boolean;
