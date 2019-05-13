@@ -17,7 +17,7 @@ import {ComandaDtoList} from "../../../shared/DTOs/ComandaDtoList";
 @Component({
   selector: 'app-client-detail',
   templateUrl: './client-detail.component.html',
-  styleUrls: ['./client-detail.component.sass']
+  styleUrls: ['./client-detail.component.css']
 })
 export class ClientDetailComponent implements OnInit {
   comandaSelected: ComandaDto = new ComandaDto();
