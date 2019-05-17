@@ -1,3 +1,38 @@
-<p>
-  comanda works!
-</p>
+<h2 class="my-2">Comenzi</h2>
+
+<div class="table-responsive">
+  <table class="table text-center table-hover">
+
+    <thead>
+      <tr class="table-danger">
+        <th scope="col">Comanda ID</th>
+        <th scope="col">Email Client</th>
+        <th scope="col">Nume Angajat</th>
+        <th scope="col">Telefon</th>
+        <th scope="col">ID Unic Telefon ID</th>
+        <th scope="col">Defectiuni</th>
+        <th scope="col">Stare</th>
+        <th scope="col">Data Deschidere</th>
+        <th scope="col">Data Inchidere</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let comanda of comenzi">
+        <th scope="row">{{comanda.IdComanda}}</th>
+        <td>{{comanda.ClientEmail}}</td>
+        <td>{{comanda.EmployeeName}}</td>
+        <td>{{comanda.Telefon}}</td>
+        <td>{{comanda.IdUnicTelefon}}</td>
+        <td>{{comanda.DefectiuneDtos}}</td>
+        <td>{{comanda.stare}}</td>
+        <td>{{comanda.DataDeschidere}}</td>
+        <td>{{comanda.DataInchidere}}</td>
+        <td>
+          <button class="btn btn-outline-danger float-right" (click)="gotoDetail(comanda)">Detalii</button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>

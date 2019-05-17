@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="BaseService.cs" />
     <Compile Include="CustomerOrder\Service\DTO\AddComandaDto.cs" />
+    <Compile Include="CustomerOrder\Service\DTO\ComandaListDto.cs" />
     <Compile Include="CustomerOrder\Service\DTO\Date.cs" />
     <Compile Include="CustomerOrder\Service\DTO\ResponseComandaDto.cs" />
     <Compile Include="CustomerOrder\Service\DTO\ResponseDefectiuneDto.cs" />

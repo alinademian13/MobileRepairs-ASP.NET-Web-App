@@ -36,6 +36,8 @@ namespace CustomerOrder.Controllers
             cm.stare = addComandaDto1.stare;
             cm.DataDeschidere = DateTime.ParseExact(addComandaDto1.DataDeschidere, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             cm.DataInchidere = DateTime.ParseExact(addComandaDto1.DataInchidere, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            cm.defectiune = addComandaDto1.DefectiuneDtos;
+
             return Ok(comandaService.AddComanda(cm));
         }
         [HttpPut]

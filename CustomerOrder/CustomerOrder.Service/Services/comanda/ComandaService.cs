@@ -15,65 +15,65 @@ namespace CustomerOrder.Service.Services.comanda
         {
             return DbContext.Comanda.Select(x => new CustomerOrder.Service.DTO.ResponseComandaDto()
             {
-                idComanda = x.idComanda,
-                idClient = x.idClient,
+                IdComanda = x.idComanda,
+                IdClient = x.idClient,
 
-                ClientName = (from client in DbContext.client
+                ClientEmail = (from client in DbContext.client
                               where client.idClient == x.idClient
-                              select client.nume).FirstOrDefault(),
+                              select client.email).FirstOrDefault(),
+                EmployeeName = (from employee in DbContext.employee
+                                where employee.idEmployee == x.idEmployee
+                                select employee.Name).FirstOrDefault(),
+                Telefon = new AddTelefonDto()
+                {
+                    Brand = x.telefon.brand,
+                    Marca = x.telefon.marca
+                },
+             
+                IdUnicTelefon = x.idUnicTelefon,
+                Stare = x.stare,
+                DataDeschidere = x.DataDeschidere,
+                DataInchidere = x.DataInchidere,
+                DefectiuneDtos = x.defectiune,
+
+
+            }).Where(n => n.IdClient == id).ToList();
+
+        }
+
+        public CustomerOrder.Service.DTO.ComandaListDto GetComandaList()
+        {
+
+            var result = DbContext.Comanda.Select(x => new CustomerOrder.Service.DTO.ResponseComandaDto()
+            {
+                IdComanda = x.idComanda,
+                ClientEmail = (from client in DbContext.client
+                               where client.idClient == x.idClient
+                               select client.email).FirstOrDefault(),
                 EmployeeName = (from employee in DbContext.employee
                                 where employee.idEmployee == x.idEmployee
                                 select employee.Name).FirstOrDefault(),
 
-              //  Telefon = (from telefon in DbContext.telefon
-                //           where telefon.idTelefon == x.idTelefon
-                  //         select (AddTelefonDto)telefon).FirstOrDefault(),
-                idUnicTelefon = x.idUnicTelefon,
-                stare = x.stare,
+                Telefon = new AddTelefonDto()
+                {
+                    Brand = x.telefon.brand,
+                    Marca = x.telefon.marca
+                },
+                IdUnicTelefon = x.idUnicTelefon,
+                Stare = x.stare,
                 DataDeschidere = x.DataDeschidere,
                 DataInchidere = x.DataInchidere,
                 DefectiuneDtos = x.defectiune,
-
-
-            }).Where(n => n.idClient == id).ToList();
-
-        }
-
-        public IEnumerable<CustomerOrder.Service.DTO.ResponseComandaDto> GetComandaList()
-        {
-
-
-
-
-            return DbContext.Comanda.Select(x => new CustomerOrder.Service.DTO.ResponseComandaDto()
+            });
+            return new CustomerOrder.Service.DTO.ComandaListDto()
             {
-                idComanda = x.idComanda,
-                ClientName = (from client in DbContext.client
-                              where client.idClient == x.idClient
-                              select client.nume).Single(),
-                EmployeeName = (from employee in DbContext.employee
-                                where employee.idEmployee == x.idEmployee
-                                select employee.Name).Single(),
-
-                Telefon = (from telefon in DbContext.telefon
-                           where telefon.idTelefon == x.idTelefon
-                           select (AddTelefonDto)telefon).Single(),
-                idUnicTelefon = x.idUnicTelefon,
-                stare = x.stare,
-                DataDeschidere = x.DataDeschidere,
-                DataInchidere = x.DataInchidere,
-                DefectiuneDtos = x.defectiune,
-
-
-            }).ToList();
+                ComandaList = result
+            };
+            //}).ToList();
         }
         public String AddComanda(DAL.Comanda addComandaDto)
          {
-           
-             
-
-            
-
+ 
             DbContext.Comanda.Add(addComandaDto);
             DbContext.SaveChanges();
             return "adaugat";

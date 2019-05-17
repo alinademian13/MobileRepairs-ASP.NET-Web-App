@@ -16,6 +16,6 @@ namespace CustomerOrder.Service.DTO
         public Nullable<bool> stare { get; set; }
         public String DataDeschidere { get; set; }
         public String DataInchidere { get; set; }
-      //  public HashSet<CustomerOrder.Service.DTO.ResponseDefectiuneDto> DefectiuneDtos { get; set; }
+        public ICollection<DAL.defectiune> DefectiuneDtos { get; set; }
     }
 }
