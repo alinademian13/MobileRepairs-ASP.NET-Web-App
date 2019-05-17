@@ -23,6 +23,7 @@ export class ComandaComponent implements OnInit {
   getComenzi() {
     this.comandaService.getComenzi().then(rsp => {
       this.comenzi = rsp.ComandaList;
+      this.router.navigate(['/comanda']);
     }, err => {
       console.log('error', err);
     });

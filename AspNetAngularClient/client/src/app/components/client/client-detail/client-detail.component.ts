@@ -156,24 +156,26 @@ export class ClientDetailComponent implements OnInit {
     console.log(this.ngbDateParserFormatter.format(this.selectedDateDeschidere));
     const selectedDateD = this.ngbDateParserFormatter.format(this.selectedDateDeschidere)
     const selectedDateI = this.ngbDateParserFormatter.format(this.selectedDateInchidere)
-    this.apiService.addComanda(this.client.ID_Client, this.employeeSelected.idEmployee, this.telefonSelected.IdTelefon, this.idUnicTelefon, true, selectedDateD, selectedDateI).then(r => {
-
-    }, err => {
-
-    })
+    this.apiService.addComanda(
+      this.client.ID_Client, this.employeeSelected.idEmployee, this.telefonSelected.IdTelefon, this.idUnicTelefon, true, selectedDateD, selectedDateI)
+      .subscribe(() => {
+        this.router.navigate(['/comanda']);
+      }, err => {
+        console.log('error', err);
+      });
   }
 
-  addComanda(idClient: number, idEmployee: number, Telefon1: Telefon,
-             idUnicTelefon: string, stare: boolean, DataDeschidere: Date, DataInchidere: Date) {
+  //addComanda(idClient: number, idEmployee: number, Telefon1: Telefon,
+  //           idUnicTelefon: string, stare: boolean, DataDeschidere: Date, DataInchidere: Date) {
 
-    this.apiService.addComanda(idClient, idEmployee, Telefon1.IdTelefon,
-      Number(idUnicTelefon), stare, DataDeschidere, DataInchidere).then(rsp => {
-      if (rsp === 'added') {
-        console.log('succes');
-      }
-    });
+  //  this.apiService.addComanda(idClient, idEmployee, Telefon1.IdTelefon,
+  //    Number(idUnicTelefon), stare, DataDeschidere, DataInchidere).subscribe(rsp => {
+  //    if (rsp === 'added') {
+  //      console.log('succes');
+  //    }
+  //  });
 
-  }
+  //}
 
   onSelectComanda(comanda: ComandaDto) {
     this.comandaSelected = comanda;

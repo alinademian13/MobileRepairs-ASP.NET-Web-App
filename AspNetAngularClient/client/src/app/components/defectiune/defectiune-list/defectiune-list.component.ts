@@ -45,7 +45,6 @@ export class DefectiuneListComponent implements OnInit {
 
       this.defectiuneService.deleteDefectiune(this.selectedDefectiune.Id)
         .subscribe(result => {
-            console.log('Defectiunea a fost stearsa' + result);
             this.defectiuni.splice(this.selectedDefectiuneIndex, 1);
           },
           error => {
@@ -65,14 +64,24 @@ export class DefectiuneListComponent implements OnInit {
 
   update(id, nume, cost) {
     this.defectiuneService.update(id, nume, cost)
-      .then(rsp => {
-        if (rsp === 'updated') {
-          window.location.reload();
-          this.editing = false;
-        }
-      }, error => {
+      .subscribe(
+        (data) => {
+          this.ngOnInit();
+        }),
+      error => {
         console.log('error', error);
-      });
+      }
   }
+  //update(id, nume, cost) {
+  //  this.defectiuneService.update(id, nume, cost)
+  //    .then(rsp => {
+  //      if (rsp === 'updated') {
+  //        window.location.reload();
+  //        this.editing = false;
+  //      }
+  //    }, error => {
+  //      console.log('error', error);
+  //    });
+  //}
 
 }

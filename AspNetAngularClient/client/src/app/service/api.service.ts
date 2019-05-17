@@ -56,7 +56,7 @@ export class ApiService {
   }
 
   addComanda(idClient: number, idEmployee: number, idTelefon: number,
-             idUnicTelefon: number, stare: boolean, DataDeschidere: any, DataInchidere: any) {
+    idUnicTelefon: number, stare: boolean, DataDeschidere: any, DataInchidere: any): Observable<any> {
 
     const DataDeschidere1 = DataDeschidere + ' ' + '00' + ':' + '00' as string;
     console.log(DataDeschidere1);
@@ -76,6 +76,6 @@ export class ApiService {
       DataInchidere
     } as ComandaDto;
 
-    return this.http.post(environment.apiurl + '/Comanda/AddComanda', comanda).toPromise();
+    return this.http.post(environment.apiurl + '/Comanda/AddComanda', comanda);
   }
 }

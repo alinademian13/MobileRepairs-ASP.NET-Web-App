@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Defectiune } from './../shared/DTOs/defectiune';
 import { DefectiuneId } from './../shared/Models/defectiuneId';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,10 +27,10 @@ export class DefectiuneService {
     return this.http.delete<DefectiuneId>(url);
   }
 
-  update(id, nume, cost) {
+  update(id, nume, cost): Observable<any> {
     const defectiuneDto = {Nume: nume, Cost: cost};
     const url = `${this.base}UpdateDefectiune/${id}`;
-    return this.http.put(url, defectiuneDto).toPromise();
+    return this.http.put(url, defectiuneDto);
   }
 
 }

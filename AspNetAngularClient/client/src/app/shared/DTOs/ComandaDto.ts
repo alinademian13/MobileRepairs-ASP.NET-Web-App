@@ -5,7 +5,7 @@ export class ComandaDto {
   clientEmail: string;
   idEmployee: number;
   numeEmployee: string;
-  idTelefon: number;
+  telefon: TelefonDto;
   idUnicTelefon: number;
   stare: boolean;
   DataDeschidere: any;
