@@ -3,6 +3,7 @@ using System.Web.Http;
 
 namespace CustomerOrder.Controllers
 {
+    [Authorize]
     public class TelefonController : ApiController
     {
         private TelefonService telefonService = new TelefonService();

@@ -67,11 +67,14 @@
     <Compile Include="CustomerOrder\Service\DTO\EditTelefonDto.cs" />
     <Compile Include="CustomerOrder\Service\DTO\ResponseEmployeeDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AuthService\AuthService.cs" />
+    <Compile Include="Services\AuthService\dto\LoginInputDTO.cs" />
     <Compile Include="Services\Client\ClientService.cs" />
     <Compile Include="Services\comanda\ComandaService.cs" />
     <Compile Include="Services\Defectiune\Converter\DefectiuneConverter.cs" />
     <Compile Include="Services\Defectiune\DefectiuneService.cs" />
     <Compile Include="Services\Employee\EmployeeService.cs" />
+    <Compile Include="Services\Employee\Dto\UserDisplayDTO.cs" />
     <Compile Include="Services\Telefon\TelefonService.cs" />
   </ItemGroup>
   <ItemGroup />

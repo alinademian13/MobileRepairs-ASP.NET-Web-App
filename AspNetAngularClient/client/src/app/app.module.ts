@@ -2,7 +2,7 @@ import { BrowserModule} from '@angular/platform-browser';
 import { NgModule} from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { NgbdDatepickerComponent } from './components/datepicker/datepicker';
 
@@ -31,6 +31,8 @@ import { ComandaService } from './service/comanda.service';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarService } from './service/navbar.service';
+import { TokenInterceptor } from './interceptors/token.interceptors';
+import { ApiService } from './service/api.service';
 
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
@@ -58,6 +60,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     HttpClientModule,
     FormsModule,
 
+    ReactiveFormsModule,
+    CommonModule
+
     NgMultiSelectDropDownModule.forRoot()
   ],
   exports: [
@@ -67,8 +72,17 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     BrowserModule,
     HttpClientModule,
     NgbdDatepickerComponent
+
+
   ],
-  providers: [AuthGuardService, AuthService, TelefonService, ClientService, DefectiuneService, ComandaService, NavbarService],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    AuthGuardService, AuthService, TelefonService, ClientService, DefectiuneService, ComandaService, NavbarService, ApiService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\components",
+    "\\src\\app\\components\\datepicker",
+    "\\src\\app\\components\\login",
+    "\\src\\app\\components\\navbar",
+    "\\src\\app\\service",
+    "\\src\\app\\shared",
+    "\\src\\app\\shared\\DTOs",
+    "\\src\\environments"
+  ],
+  "SelectedNode": "\\src\\app\\components\\login\\login.component.ts",
+  "PreviewInSolutionExplorer": false
+}

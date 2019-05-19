@@ -73,4 +73,7 @@ export class ApiService {
 
     return this.http.post(environment.apiurl + '/Comanda/AddComanda', comanda);
   }
+  getUserDisplayName() {
+    return this.http.get<any>(environment.apiurl + '/GetUserDisplay').toPromise();
+  }
 }
