@@ -12,6 +12,11 @@ import {ComandaDto} from '../../../shared/DTOs/ComandaDto';
 import {NavbarService} from '../../../service/navbar.service';
 import {NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import {ComandaDtoList} from "../../../shared/DTOs/ComandaDtoList";
+import { Location } from '@angular/common';
+import { Defectiune } from '../../../shared/DTOs/defectiune';
+import { DefectiuneService } from '../../../service/defectiune.service';
+import { Observable } from 'rxjs';
+import { defectiuneListDto } from '../../../shared/DTOs/defectiuneListDto';
 
 
 @Component({
@@ -26,7 +31,7 @@ export class ClientDetailComponent implements OnInit {
   client: ClientDTO = new ClientDTO();
   editing: boolean = false;
   comanda: boolean = false;
-  stare: boolean = false;
+  arataDataInchidere: boolean = false;
   id: number;
   errorMessage: any;
   employeeSelected: EmployeeId = new EmployeeId();
@@ -36,7 +41,22 @@ export class ClientDetailComponent implements OnInit {
   selectedDateInchidere: NgbDate;
   idUnicTelefon: number;
 
-  constructor(private clientService: ClientService, private router: Router, private route: ActivatedRoute, private apiService: ApiService, private telefonService: TelefonService, private nav: NavbarService, private ngbDateParserFormatter: NgbDateParserFormatter) {
+  defectiuneList: Array<defectiuneListDto>;
+
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings = {};
+
+  constructor(private clientService: ClientService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private apiService: ApiService,
+              private telefonService: TelefonService,
+              private nav: NavbarService,
+              private ngbDateParserFormatter: NgbDateParserFormatter,
+              private location: Location,
+              private defectiuneService: DefectiuneService
+  ) {
 
     this.route.queryParams.subscribe(params => {
 
@@ -53,6 +73,46 @@ export class ClientDetailComponent implements OnInit {
     this.getEmployeeList();
     this.getTelefonList();
     this.getComandaList(this.client.ID_Client);
+
+
+    this.dropdownList = this.defectiuneList;
+
+
+    this.selectedItems = [
+      { item_id: 3, item_text: 'Pune' },
+      { item_id: 4, item_text: 'Navsari' }
+    ];
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+  }
+
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+
+  //getDefectiuniList() {
+  //  this.defectiuneService.getDefectiuni().then(
+  //    defectiuniList => this.defectiuneList = defectiuniList,
+  //    error => this.errorMessage = error as any
+  //  );
+  //}
+
+  goBack(): void {
+    this.location.back();
+  }
+
+  addButton() {
+    this.comanda = true;
   }
 
   getTelefonList() {
@@ -82,27 +142,6 @@ export class ClientDetailComponent implements OnInit {
 
   editClient() {
     this.editing = true;
-
-
-  }
-
-  saveClient(id: number, nume: string, email: string, adresa: string) {
-
-    this.clientService.updateClient(id, nume, email, adresa).then(rsp => {
-        if (rsp === 'updated') {
-          // this.router.navigate(["/client"]);
-          this.client.Email = email;
-          this.client.Nume = nume;
-          this.client.Adresa = adresa;
-          // tslint:disable-next-line:no-unused-expression
-          this.router.onSameUrlNavigation;
-          // window.location.reload();
-          this.editing = false;
-        }
-      }, err => {
-        console.log('error', err);
-      }
-    );
   }
 
   deleteClient(id: number) {
@@ -118,17 +157,10 @@ export class ClientDetailComponent implements OnInit {
     );
   }
 
-  // goBack(): void {
-  // this.location.back();
-  // }
-
-  // save(): void {
-  //  this.clientService.update(this.client)
-  //    .subscribe(_ => this.goBack());
-  // }
-  addButton() {
-    this.comanda = true;
-  }
+   //save(): void {
+   // this.clientService.update(this.client)
+   //   .subscribe(_ => this.goBack());
+   //}
 
   onSelect(employee: EmployeeId) {
     this.employeeSelected = employee;
@@ -139,7 +171,7 @@ export class ClientDetailComponent implements OnInit {
   }
 
   checkebox() {
-    this.stare = true;
+    this.arataDataInchidere = true;
   }
 
   onSelectDateDeschidere($event: NgbDate) {

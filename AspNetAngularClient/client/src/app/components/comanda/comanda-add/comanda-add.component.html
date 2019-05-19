@@ -1,0 +1,58 @@
+<!--<h2 class="my-2">Adauga comanda</h2>
+
+<div class="row my-3">
+  <div class="col-sm-12 offset-md-1 col-md-10 offset-md-1 offset-lg-2 col-lg-8 offset-lg-2 ">
+
+    <form>
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Alege angajat</label>
+        <select name="employee" class="form-control" id="exampleFormControlSelect1" [(ngModel)]="employeeSelected">
+          <option *ngFor="let employee of employeeList" [ngValue]="employee"
+                  [class.selected]="employee === employeeSelected"
+                  (select)="onSelect(employee)">
+            {{employee.idEmployee}}{{employee.Name}}
+          </option>
+        </select>
+        <div>
+          Ati selectat : {{employeeSelected.idEmployee | json}}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Alege tip telefon</label>
+        <select name="telefon" class="form-control" id="exampleFormControlSelect2" [(ngModel)]="telefonSelected">
+          <option *ngFor="let telefon of telefonList" [ngValue]="telefon"
+                  [class.selected]="telefon === telefonSelected"
+                  (click)="onSelectTelefon(telefon)">
+            {{telefon.Marca}} {{telefon.Brand}}
+          </option>
+
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Id unic telefon</label>
+        <input [(ngModel)]="idUnicTelefon" name="idUnicTelefon" type="text" class="form-control" id="exampleFormControlInput1"
+               placeholder="xxxzzz438763878">
+      </div>
+      <label>Data deschidere</label>
+
+      <div class="form-group">
+        <input type="text" name="startDate" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="selectedDateDeschidere" />
+        <button (click)="d.toggle()">&dArr;</button>
+      </div>-->
+
+      <!--<ngbd-datepicker-popup (voted)="onSelectDateDeschidere($event)"></ngbd-datepicker-popup>-->
+      <!--Inchideti comanda <input type="checkbox" (click)="checkebox()">
+      <div *ngIf="stare">
+        <label>Data inchidere</label>
+        <input type="text" name="startDate" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="selectedDateInchidere" />
+        <button (click)="d.toggle()">&dArr;</button>
+      </div>
+      <button class="btn btn-outline-danger" style="float:right"
+              (click)="submit()">
+        Adauga comanda
+      </button>
+    </form>
+
+  </div>
+
+</div>-->

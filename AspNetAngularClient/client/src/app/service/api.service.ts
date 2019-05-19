@@ -9,6 +9,7 @@ import {Comanda} from './../shared/Models/Comanda';
 import {TelefonDto} from './../shared/DTOs/TelefonDto';
 import {ComandaDto} from './../shared/DTOs/ComandaDto';
 import {ComandaDtoList} from "../shared/DTOs/ComandaDtoList";
+import { AddComandaDto } from '../shared/DTOs/AddComandaDto';
 
 
 const httpOptions = {
@@ -74,7 +75,7 @@ export class ApiService {
       stare,
       DataDeschidere,
       DataInchidere
-    } as ComandaDto;
+    } as AddComandaDto;
 
     return this.http.post(environment.apiurl + '/Comanda/AddComanda', comanda);
   }

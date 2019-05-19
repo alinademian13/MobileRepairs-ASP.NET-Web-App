@@ -32,6 +32,8 @@ import { ComandaService } from './service/comanda.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarService } from './service/navbar.service';
 
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { NavbarService } from './service/navbar.service';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+
+    NgMultiSelectDropDownModule.forRoot()
   ],
   exports: [
     ReactiveFormsModule,
