@@ -3,12 +3,12 @@ import {Defectiune} from './defectiune';
 
 export class ComandaDtoList {
 
-  idComanda: number;
-  idClient: number;
+  IdComanda: number;
+  ClientEmail: string;
   ClientName: string;
   EmployeeName: string;
   Telefon: TelefonDto;
-  idUnicTelefon: number;
+  IdUnicTelefon: number;
   stare: boolean;
   DefectiuniDtos: Array<Defectiune>;
   DataDeschidere: string;
