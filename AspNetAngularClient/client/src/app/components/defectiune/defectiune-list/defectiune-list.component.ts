@@ -26,6 +26,7 @@ export class DefectiuneListComponent implements OnInit {
     this.nav.show();
     this.defectiuneService.getDefectiuni().then(rsp => {
       this.defectiuni = rsp;
+      console.log(rsp);
     }, err => {
       console.log(' error', err);
     });

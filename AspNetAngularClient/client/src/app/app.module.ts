@@ -34,6 +34,8 @@ import { NavbarService } from './service/navbar.service';
 import { TokenInterceptor } from './interceptors/token.interceptors';
 import { ApiService } from './service/api.service';
 
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 
 @NgModule({
   declarations: [
@@ -60,6 +62,7 @@ import { ApiService } from './service/api.service';
     ReactiveFormsModule,
     CommonModule
 
+    NgMultiSelectDropDownModule.forRoot()
   ],
   exports: [
     ReactiveFormsModule,

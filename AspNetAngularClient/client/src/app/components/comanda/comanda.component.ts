@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ComandaDtoList } from '../../shared/DTOs/ComandaDtoList';
-import { ComandaService } from '../../service/comanda.service';
-import { Router } from '@angular/router';
-import { NavbarService } from '../../service/navbar.service';
-import { ComandaDto } from '../../shared/DTOs/ComandaDto';
+import {Component, OnInit} from '@angular/core';
+import {ComandaDtoList} from '../../shared/DTOs/ComandaDtoList';
+import {ComandaService} from '../../service/comanda.service';
+import {Router} from '@angular/router';
+import {NavbarService} from '../../service/navbar.service';
+
 
 @Component({
   selector: 'app-comanda',
@@ -11,9 +11,11 @@ import { ComandaDto } from '../../shared/DTOs/ComandaDto';
   styleUrls: ['./comanda.component.css']
 })
 export class ComandaComponent implements OnInit {
-  comenzi: ComandaDto[] = [];
+  comenzi: Array<ComandaDtoList>;
+  errorMessage: any;
 
-  constructor(private comandaService: ComandaService, private router: Router, private nav: NavbarService) { }
+  constructor(private comandaService: ComandaService, private router: Router, private nav: NavbarService) {
+  }
 
   ngOnInit() {
     this.nav.show();
@@ -21,12 +23,11 @@ export class ComandaComponent implements OnInit {
   }
 
   getComenzi() {
-    this.comandaService.getComenzi().then(rsp => {
-      this.comenzi = rsp.ComandaList;
-      this.router.navigate(['/comanda']);
-    }, err => {
-      console.log('error', err);
-    });
+    this.comandaService.getComenzi().then(
+      comandaList => this.comenzi = comandaList,
+
+      error1 => this.errorMessage = error1 as any
+    );
   }
 
 }
