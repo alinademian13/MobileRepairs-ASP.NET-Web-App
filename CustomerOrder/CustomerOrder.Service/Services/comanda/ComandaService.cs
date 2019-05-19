@@ -1,4 +1,5 @@
 ﻿using CustomerOrder.DTO;
+using CustomerOrder.Service.CustomerOrder.Service.DTO;
 using CustomerOrder.Service.DTO;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,8 @@ namespace CustomerOrder.Service.Services.comanda
                 IdClient = x.idClient,
 
                 ClientEmail = (from client in DbContext.client
-                              where client.idClient == x.idClient
-                              select client.email).FirstOrDefault(),
+                               where client.idClient == x.idClient
+                               select client.email).FirstOrDefault(),
                 EmployeeName = (from employee in DbContext.employee
                                 where employee.idEmployee == x.idEmployee
                                 select employee.Name).FirstOrDefault(),
@@ -29,7 +30,7 @@ namespace CustomerOrder.Service.Services.comanda
                     Brand = x.telefon.brand,
                     Marca = x.telefon.marca
                 },
-             
+
                 IdUnicTelefon = x.idUnicTelefon,
                 Stare = x.stare,
                 DataDeschidere = x.DataDeschidere,
@@ -41,7 +42,7 @@ namespace CustomerOrder.Service.Services.comanda
 
         }
 
-        public CustomerOrder.Service.DTO.ComandaListDto GetComandaList()
+        public IEnumerable<ResponseComandaDto> GetComandaList()
         {
 
             var result = DbContext.Comanda.Select(x => new CustomerOrder.Service.DTO.ResponseComandaDto()
@@ -64,16 +65,14 @@ namespace CustomerOrder.Service.Services.comanda
                 DataDeschidere = x.DataDeschidere,
                 DataInchidere = x.DataInchidere,
                 DefectiuneDtos = x.defectiune,
-            });
-            return new CustomerOrder.Service.DTO.ComandaListDto()
-            {
-                ComandaList = result
-            };
-            //}).ToList();
+            }).ToList();
+            return result;
         }
+
+
         public String AddComanda(DAL.Comanda addComandaDto)
-         {
- 
+        {
+
             DbContext.Comanda.Add(addComandaDto);
             DbContext.SaveChanges();
             return "adaugat";

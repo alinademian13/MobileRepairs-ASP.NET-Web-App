@@ -1,10 +1,10 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import {Component, Output, EventEmitter, OnInit} from '@angular/core';
 
-import { Router } from '@angular/router';
-import { Employee } from '../../shared/DTOs/employee';
-import { ApiService } from '../../service/api.service';
-import { AuthService } from '../../service/auth.service';
-import { NavbarService } from '../../service/navbar.service';
+import {Router} from '@angular/router';
+import {Employee} from '../../shared/DTOs/employee';
+import {ApiService} from '../../service/api.service';
+import {AuthService} from '../../service/auth.service';
+import {NavbarService} from '../../service/navbar.service';
 
 
 @Component({
@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
   error: string;
   Name: string;
   Password: string;
-  @Output() loginName = new EventEmitter<string>(); 
-  @Output() loginPassword = new EventEmitter<string>(); 
+  @Output() loginName = new EventEmitter<string>();
+  @Output() loginPassword = new EventEmitter<string>();
 
   constructor(private router: Router, private authService: AuthService, private api: ApiService, public nav: NavbarService) {
 
@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    
-    this.authService.login(this.Name, this.Password).then(rsp => { 
+
+    this.authService.login(this.Name, this.Password).then(rsp => {
       this.loginName.emit(this.Name);
       this.loginPassword.emit(this.Password);
       console.log("Received")
@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
     });
 
   }
+
   getEmployees() {
     this.api.getEmployees().subscribe(
       employees => this.employees = employees,
@@ -66,7 +67,7 @@ export class LoginComponent implements OnInit {
   signUp() {
     this.router.navigate(['signUp']);
   }
-  
+
 
 }
 

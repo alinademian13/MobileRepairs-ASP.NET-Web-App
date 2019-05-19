@@ -44,7 +44,7 @@ export class ClientDetailComponent implements OnInit {
   alt: Array<any>;
   defectiuneList: Array<DefectiuneId>;
 
-  dropdownList: [];
+  dropdownList: Array<any>;
   selectedItems = [];
   dropdownSettings = {};
 

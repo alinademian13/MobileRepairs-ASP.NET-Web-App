@@ -73,7 +73,7 @@
             (click)="onSelectComanda(comanda)">
           <div class="row text-center my-1">
             <div class="col-sm-6">
-              <p class="font-weight-bold">Client: </p>{{comanda.ClientName}}
+              <p class="font-weight-bold">Client: </p>{{comanda.ClientEmail}}
             </div>
             <div class="col-sm-6">
               <p class="font-weight-bold">Angajat: </p>{{comanda.EmployeeName}}
@@ -81,15 +81,15 @@
           </div>
           <div class="row text-center my-1">
             <div class="col-sm-6">
-              <p class="font-weight-bold">ID Unic Telefon: </p>{{comanda.idUnicTelefon}}
+              <p class="font-weight-bold">ID Unic Telefon: </p>{{comanda.IdUnicTelefon}}
             </div>
             <div class="col-sm-6">
-              <p class="font-weight-bold">Telefon: </p>{{comanda.Telefon}}
+              <p class="font-weight-bold">Telefon: </p>{{comanda.Telefon.Brand}}/{{comanda.Telefon.Marca}}
             </div>
           </div>
           <div class="row text-center my-1">
             <div class="col-sm-12">
-              <p class="font-weight-bold">Stare: </p>{{comanda.stare}}
+              <p class="font-weight-bold">Stare: </p>{{comanda.Stare}}
             </div>
           </div>
           <div class="row text-center my-1">
