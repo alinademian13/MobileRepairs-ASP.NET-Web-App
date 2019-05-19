@@ -14,7 +14,7 @@ export class DefectiuneService {
   }
 
   getDefectiuni() {
-    return this.http.get<Defectiune[]>(this.base + 'getDefectiuni').toPromise();
+    return this.http.get<DefectiuneId[]>(this.base + 'getDefectiuni').toPromise();
   }
 
   addDefectiuni(nume, cost) {

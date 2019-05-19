@@ -9,11 +9,14 @@ import {TelefonService} from '../../../service/telefon.service';
 import {NavbarService} from '../../../service/navbar.service';
 import {NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import {ComandaDtoList} from '../../../shared/DTOs/ComandaDtoList';
-import { Location } from '@angular/common';
-import { Defectiune } from '../../../shared/DTOs/defectiune';
-import { DefectiuneService } from '../../../service/defectiune.service';
-import { Observable } from 'rxjs';
-import { defectiuneListDto } from '../../../shared/DTOs/defectiuneListDto';
+import {Location} from '@angular/common';
+import {Defectiune} from '../../../shared/DTOs/defectiune';
+import {DefectiuneService} from '../../../service/defectiune.service';
+import {Observable} from 'rxjs';
+import {DefectiuneMultiSelect} from "../../../shared/DTOs/DefectiuneMultiSelect";
+import {DefectiuneId} from "../../../shared/Models/defectiuneId";
+import {ListItem} from "ng-multiselect-dropdown/multiselect.model";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-client-detail',
@@ -40,10 +43,10 @@ export class ClientDetailComponent implements OnInit {
   selectedDateDeschidere: NgbDate;
   selectedDateInchidere: NgbDate;
   idUnicTelefon: number;
+  alt: Array<any>;
+  defectiuneList: DefectiuneId[];
 
-  defectiuneList: Array<Defectiune>;
-
-  dropdownList = [];
+  dropdownList: Array<any>;
   selectedItems = [];
   dropdownSettings = {};
 
@@ -76,19 +79,8 @@ export class ClientDetailComponent implements OnInit {
     this.getDefectiuniList();
 
 
-    this.dropdownList = this.defectiuneList;
-    console.log("1:");
-    console.log(this.dropdownList)
-    console.log("2:");
-    //console.log(this.defectiuneList);
+    this.selectedItems = [];
 
-    setTimeout(function () { console.log(this.defectiuneList)}, 2000);
-
-
-    this.selectedItems = [
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' }
-    ];
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'item_id',
@@ -103,7 +95,11 @@ export class ClientDetailComponent implements OnInit {
   getDefectiuniList() {
     this.defectiuneService.getDefectiuni().then(rsp => {
       this.defectiuneList = rsp;
-      //console.log(rsp);
+
+      this.dropdownList = this.defectiuneList.map(d => ({id: d.Id, text: d.Nume})
+      );
+      console.log(this.dropdownList);
+
     }, err => {
       console.log(' error', err);
     });
@@ -112,6 +108,7 @@ export class ClientDetailComponent implements OnInit {
   onItemSelect(item: any) {
     console.log(item);
   }
+
   onSelectAll(items: any) {
     console.log(items);
   }
@@ -122,6 +119,7 @@ export class ClientDetailComponent implements OnInit {
   }
 
   addButton() {
+
     this.comanda = true;
   }
 
@@ -172,6 +170,12 @@ export class ClientDetailComponent implements OnInit {
   //    .subscribe(_ => this.goBack());
   //}
 
+  // save(): void {
+  // this.clientService.update(this.client)
+  //   .subscribe(_ => this.goBack());
+  // }
+
+
   onSelect(employee: EmployeeId) {
     this.employeeSelected = employee;
   }
@@ -199,7 +203,8 @@ export class ClientDetailComponent implements OnInit {
     const selectedDateD = this.ngbDateParserFormatter.format(this.selectedDateDeschidere)
     const selectedDateI = this.ngbDateParserFormatter.format(this.selectedDateInchidere)
     this.apiService.addComanda(
-      this.client.ID_Client, this.employeeSelected.idEmployee, this.telefonSelected.IdTelefon, this.idUnicTelefon, true, this.defectiuneList, selectedDateD, selectedDateI)
+      this.client.ID_Client, this.employeeSelected.idEmployee, this.telefonSelected.IdTelefon, this.idUnicTelefon,
+      true, this.selectedItems, selectedDateD, selectedDateI)
       .subscribe(() => {
         this.router.navigate(['/comanda']);
       }, err => {

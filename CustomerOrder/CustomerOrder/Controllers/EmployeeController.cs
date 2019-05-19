@@ -4,13 +4,13 @@ using System.Web.Http;
 
 namespace CustomerOrder.Controllers
 {
+    [Authorize]
 
 
-
-    public class EmployeeController : ApiController
+    public class EmployeeController : BaseController
     {
 
-        private EmployeeService EmployeeService = new EmployeeService();
+         EmployeeService EmployeeService = new EmployeeService();
 
 
         [HttpGet]
@@ -34,6 +34,12 @@ namespace CustomerOrder.Controllers
           
             return Ok(EmployeeService.AddEmployee(addEmployee));
         }
+
+        //[HttpGet]
+        //public IHttpActionResult GetUserDisplay()
+        //{
+        //    return Ok(EmployeeService.GetDisplayName(LoggedUserID));
+        //}
 
     }
 }

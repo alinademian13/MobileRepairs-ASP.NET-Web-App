@@ -8,6 +8,7 @@ import {EmployeeId} from './../shared/Models/employeeId';
 import {Comanda} from './../shared/Models/Comanda';
 import {ComandaDtoList} from '../shared/DTOs/ComandaDtoList';
 import {Defectiune} from '../shared/DTOs/defectiune';
+import {DefectiuneId} from "../shared/Models/defectiuneId";
 
 
 const httpOptions = {
@@ -55,7 +56,7 @@ export class ApiService {
   }
 
   addComanda(idClient: number, idEmployee: number, idTelefon: number,
-             idUnicTelefon: number, stare: boolean, Defectiuni: Array<Defectiune>,
+             idUnicTelefon: number, stare: boolean, Defectiuni: Array<DefectiuneId>,
              DataDeschidere: any, DataInchidere: any): Observable<any> {
 
 
@@ -71,5 +72,8 @@ export class ApiService {
     } as Comanda;
 
     return this.http.post(environment.apiurl + '/Comanda/AddComanda', comanda);
+  }
+  getUserDisplayName() {
+    return this.http.get<any>(environment.apiurl + '/GetUserDisplay').toPromise();
   }
 }

@@ -12,7 +12,7 @@ import { NavbarService } from '../../../service/navbar.service';
   styleUrls: ['./defectiune-list.component.css']
 })
 export class DefectiuneListComponent implements OnInit {
-  defectiuni: Defectiune[] = [];
+  defectiuni: DefectiuneId[] = [];
   selectedDefectiune: DefectiuneId;
   selectedDefectiuneIndex: number;
   error = '';

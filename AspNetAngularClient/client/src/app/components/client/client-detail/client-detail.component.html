@@ -129,74 +129,18 @@
     </div>
   </div>
  </div>
-<!--<div class="table-responsive" *ngFor="let comanda of comandaList; let i = index"
-          [class.selected]="comanda === selectedComanda"
-          (click)="onSelect(comanda, i)">
-  <form *ngIf="comanda === selectedComanda">
-    <table class="table text-center table-hover">
 
-      <thead>
-        <tr class="table-danger">
-          <th scope="col">Comanda ID</th>
-          <th scope="col">Angajat</th>
-          <th scope="col">Telefon</th>
-          <th scope="col">Id Unic Telefon</th>
-          <th scope="col">Stare</th>
-          <th scope="col">Data Deschidere</th>
-          <th scope="col">Data Inchidere</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">{{comanda.IdComanda}}</th>
-          <td>
-            <span [hidden]="comanda === selectedComanda">{{comanda.EmployeeName}}</span>
-            <input type="text" #EmployeeName placeholder="EmployeeName" [value]="selectedComanda.EmployeeName"/>
-          </td>
-          <td>
-            <span [hidden]="comanda === selectedComanda">{{comanda.Telefon.Marca}} - {{comanda.Telefon.Brand}}</span>
-            <input type="text" #Telefon placeholder="Telefon" [value]="selectedComanda.Telefon.Marca" />
-          </td>
-          <td>
-            <span [hidden]="comanda === selectedComanda">{{comanda.IdUnicTelefon}}</span>
-            <input type="text" #IdUnicTelefon placeholder="IdUnicTelefon" [value]="selectedComanda.IdUnicTelefon" />
-          </td>
-          <td>
-            <span [hidden]="comanda === selectedComanda">{{comanda.stare}}</span>
-            <input type="text" #stare placeholder="stare" [value]="selectedComanda.stare" />
-          </td>
-          <td>
-            <span [hidden]="comanda === selectedComanda">{{comanda.DataDeschidere}}</span>
-            <input type="text" #DataDeschidere placeholder="DataDeschidere" [value]="selectedComanda.DataDeschidere" />
-          </td>
-          <td>
-            <span [hidden]="comanda === selectedComanda">{{comanda.DataInchidere}}</span>
-            <input type="text" #DataInchidere placeholder="DataInchidere" [value]="selectedComanda.DataInchidere" />
-          </td>
-          <td>
-            <button class="btn btn-outline-danger float-right" (click)="gotodetail(comanda)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-
-    </table>
-  </form>
-
-</div>-->
 
 <div class="container-fluid">
   <div class="row my-3">
     <div class="col-sm-12 offset-md-1 col-md-10 offset-md-1 offset-lg-2 col-lg-8 offset-lg-2 " *ngIf="comanda">
 
-      >
-
       <form>
-        >
+
         <div class="form-group">
           <label for="exampleFormControlSelect1">Alege angajat</label>
           <select name="employee" class="form-control" id="exampleFormControlSelect1" [(ngModel)]="employeeSelected">
-            r=
+
             <option *ngFor="let employee of employeeList" [ngValue]="employee"
                     [class.selected]="employee === employeeSelected"
                     (select)="onSelect(employee)">
@@ -270,7 +214,3 @@
 
   </div>
 </div>
-
-
-
-

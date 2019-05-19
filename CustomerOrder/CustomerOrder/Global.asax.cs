@@ -9,13 +9,13 @@ namespace CustomerOrder
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
-        protected void Application_Start()
-        {    
-          //  GlobalConfiguration.Configuration.Formatters.Add()
+        //protected void Application_Start()
+        //{    
+        //  //  GlobalConfiguration.Configuration.Formatters.Add()
 
-            GlobalConfiguration.Configure(WebApiConfig.Register);
+        //    GlobalConfiguration.Configure(WebApiConfig.Register);
 
-        }
+        //}
 
         //protected void Application_BeginRequest()
         //{
