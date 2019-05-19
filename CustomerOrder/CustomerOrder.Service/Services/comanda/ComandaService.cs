@@ -3,6 +3,8 @@ using CustomerOrder.Service.CustomerOrder.Service.DTO;
 using CustomerOrder.Service.DTO;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.SqlServer;
+using System.Globalization;
 using System.Linq;
 
 namespace CustomerOrder.Service.Services.comanda
@@ -33,8 +35,8 @@ namespace CustomerOrder.Service.Services.comanda
 
                 IdUnicTelefon = x.idUnicTelefon,
                 Stare = x.stare,
-                DataDeschidere = x.DataDeschidere,
-                DataInchidere = x.DataInchidere,
+                DataDeschidere = x.DataDeschidere != null ? SqlFunctions.DateName("dd", x.DataDeschidere) + " " + SqlFunctions.DateName("MM", x.DataDeschidere) + " " + SqlFunctions.DateName("yyyy", x.DataDeschidere) : String.Empty,
+                DataInchidere = x.DataInchidere != null ? SqlFunctions.DateName("dd", x.DataInchidere) + " " + SqlFunctions.DateName("MM", x.DataInchidere) + " " + SqlFunctions.DateName("yyyy", x.DataInchidere) : String.Empty,
                 DefectiuneDtos = x.defectiune,
 
 
@@ -62,10 +64,10 @@ namespace CustomerOrder.Service.Services.comanda
                 },
                 IdUnicTelefon = x.idUnicTelefon,
                 Stare = x.stare,
-                DataDeschidere = x.DataDeschidere,
-                DataInchidere = x.DataInchidere,
+                DataDeschidere = x.DataDeschidere != null ? SqlFunctions.DateName("dd", x.DataDeschidere) + " " + SqlFunctions.DateName("MM", x.DataDeschidere) + " " + SqlFunctions.DateName("yyyy", x.DataDeschidere) : String.Empty,
+                DataInchidere = x.DataInchidere != null ? SqlFunctions.DateName("dd", x.DataInchidere) + " " + SqlFunctions.DateName("MM", x.DataInchidere) + " " + SqlFunctions.DateName("yyyy", x.DataInchidere) : String.Empty,
                 DefectiuneDtos = x.defectiune,
-            }).ToList();
+            }).OrderBy(x => x.DataInchidere).ToList();
             return result;
         }
 

@@ -31,7 +31,6 @@ namespace CustomerOrder.Controllers
         [HttpPost]
         public IHttpActionResult AddComanda([FromBody] AddComandaDto addComandaDto1)
         {
-
             DAL.Comanda cm = new DAL.Comanda();
             cm.idClient = addComandaDto1.idClient;
             cm.idEmployee = addComandaDto1.idEmployee;
@@ -39,14 +38,17 @@ namespace CustomerOrder.Controllers
             cm.idUnicTelefon = addComandaDto1.idUnicTelefon;
             cm.stare = addComandaDto1.stare;
             cm.DataDeschidere = DateTime.ParseExact(addComandaDto1.DataDeschidere, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-            if (cm.DataInchidere == null)
+
+            if (String.IsNullOrEmpty(addComandaDto1.DataInchidere))
             {
-                addComandaDto1.DataInchidere = "";
-                addComandaDto1.stare = !addComandaDto1.stare.Equals(false);
-            } else
+                cm.stare = false;
+            }
+            else
             {
                 cm.DataInchidere = DateTime.ParseExact(addComandaDto1.DataInchidere, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                cm.stare = true;
             }
+
             cm.defectiune = addComandaDto1.DefectiuneDtos;
 
             return Ok(comandaService.AddComanda(cm));

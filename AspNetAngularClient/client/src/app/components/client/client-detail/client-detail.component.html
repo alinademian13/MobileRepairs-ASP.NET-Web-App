@@ -93,7 +93,7 @@
             </div>
             <div class="col-sm-6">
               <div [hidden]="comanda === comandaSelected">
-                <p class="font-weight-bold">Stare: </p>{{comanda.stare}}
+                <p class="font-weight-bold">Stare: </p>{{comanda.Stare ? 'Inchisa' : 'Deschisa'}}
               </div>
               <form *ngIf="comanda === comandaSelected">
                 <label class="font-weight-bold">Inchide comanda:</label>
@@ -168,12 +168,10 @@
                  placeholder="xxxzzz438763878">
         </div>
         <div class="d-inline-block mr-3">
-          <ng-multiselect-dropdown name="name" [placeholder]="'custom placeholder'"
+          <ng-multiselect-dropdown name="name" [placeholder]="'Defectiunile'"
                                    [data]="dropdownList"
                                    [(ngModel)]="selectedItems"
-                                   [settings]="dropdownSettings"
-                                   (onSelect)="onItemSelect($event)"
-                                   (onSelectAll)="onSelectAll($event)">
+                                   [settings]="dropdownSettings">
           </ng-multiselect-dropdown>
         </div>
         <div class="d-inline-block mx-3">
@@ -186,10 +184,10 @@
         </div>
         <div class="d-inline-block mx-3">
           <!--<ngbd-datepicker-popup (voted)="onSelectDateDeschidere($event)"></ngbd-datepicker-popup>-->
-          Inchideti comanda <input type="checkbox" (click)="checkebox()">
+          Inchideti comanda <input type="checkbox" (click)="arataDataInchidere = true">
           <div *ngIf="arataDataInchidere">
             <label>Data inchidere</label>
-            <input type="text" name="startDate" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="selectedDateInchidere" />
+            <input type="text" name="endDate" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="selectedDateInchidere" />
             <button (click)="d.toggle()">&dArr;</button>
           </div>
         </div>

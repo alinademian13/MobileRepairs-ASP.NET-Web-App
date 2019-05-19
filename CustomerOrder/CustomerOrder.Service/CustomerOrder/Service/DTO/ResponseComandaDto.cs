@@ -16,10 +16,8 @@ namespace CustomerOrder.Service.CustomerOrder.Service.DTO
         public  AddTelefonDto Telefon { get; set; }
         public int IdUnicTelefon { get; set; }
         public Nullable<bool> Stare { get; set; }
-        public Nullable<System.DateTime> DataDeschidere { get; set; }
-        public Nullable<System.DateTime> DataInchidere { get; set; }
+        public String DataDeschidere { get; set; }
+        public String DataInchidere { get; set; }
         public ICollection<DAL.defectiune> DefectiuneDtos { get; set; }
-
-
     }
 }

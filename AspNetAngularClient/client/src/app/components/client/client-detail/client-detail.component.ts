@@ -44,7 +44,6 @@ export class ClientDetailComponent implements OnInit {
   selectedDateInchidere: NgbDate;
   idUnicTelefon: number;
   alt: Array<any>;
-  defectiuneList: DefectiuneId[];
 
   dropdownList: Array<any>;
   selectedItems = [];
@@ -83,8 +82,8 @@ export class ClientDetailComponent implements OnInit {
 
     this.dropdownSettings = {
       singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
+      idField: 'id',
+      textField: 'text',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 3,
@@ -93,26 +92,11 @@ export class ClientDetailComponent implements OnInit {
   }
 
   getDefectiuniList() {
-    this.defectiuneService.getDefectiuni().then(rsp => {
-      this.defectiuneList = rsp;
-
-      this.dropdownList = this.defectiuneList.map(d => ({id: d.Id, text: d.Nume})
-      );
-      console.log(this.dropdownList);
-
-    }, err => {
-      console.log(' error', err);
-    });
+    this.defectiuneService.getDefectiuni().then(
+      rsp => this.dropdownList = rsp.map(d => ({ id: d.Id, text: d.Nume + " - " + d.Cost })),
+      err => alert(err)
+    );
   }
-
-  onItemSelect(item: any) {
-    console.log(item);
-  }
-
-  onSelectAll(items: any) {
-    console.log(items);
-  }
-
 
   goBack(): void {
     this.location.back();
@@ -170,10 +154,10 @@ export class ClientDetailComponent implements OnInit {
   //    .subscribe(_ => this.goBack());
   //}
 
-  // save(): void {
-  // this.clientService.update(this.client)
-  //   .subscribe(_ => this.goBack());
-  // }
+   saveClient(id, nume, email, adresa): void {
+   this.clientService.updateClient(id, nume, email, adresa)
+     .then(_ => this.goBack());
+   }
 
 
   onSelect(employee: EmployeeId) {
@@ -182,10 +166,6 @@ export class ClientDetailComponent implements OnInit {
 
   onSelectTelefon(telefon: Telefon) {
     this.telefonSelected = telefon;
-  }
-
-  checkebox() {
-    this.arataDataInchidere = true;
   }
 
   onSelectDateDeschidere($event: NgbDate) {
