@@ -1,4 +1,5 @@
 import {Defectiune} from '../DTOs/defectiune';
+import {DefectiuneId} from "./defectiuneId";
 
 export class Comanda {
 
@@ -7,7 +8,7 @@ export class Comanda {
   idTelefon: number;
   idUnicTelefon: number;
   stare: boolean;
-  Defectiuni: Array<Defectiune>;
+  Defectiuni: Array<DefectiuneId>;
   DataDeschidere: any;
   DataInchidere: any = null;
 

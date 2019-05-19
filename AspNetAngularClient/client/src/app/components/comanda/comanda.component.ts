@@ -12,6 +12,7 @@ import {NavbarService} from '../../service/navbar.service';
 })
 export class ComandaComponent implements OnInit {
   comenzi: Array<ComandaDtoList>;
+
   errorMessage: any;
 
   constructor(private comandaService: ComandaService, private router: Router, private nav: NavbarService) {
@@ -28,6 +29,7 @@ export class ComandaComponent implements OnInit {
 
       error1 => this.errorMessage = error1 as any
     );
+    console.log(this.comenzi);
   }
 
 }
