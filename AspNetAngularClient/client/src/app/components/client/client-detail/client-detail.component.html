@@ -1,183 +1,276 @@
 <!--<div class="container-fluid">-->
-  <!--<div style="text-align:center" class="row">
+<!--<div style="text-align:center" class="row">
 
-    <div class="col-12" *ngIf="client">
+  <div class="col-12" *ngIf="client">
 
-      <h5> Email:{{client.Email}}| Nume: {{client.Nume}}| Adresa: {{client.Adresa}}</h5>
-      <h3>Lista de comenzi</h3>
-      <ol class="comenzi">
-        <li *ngFor="let comanda of comandaList "
-            [class.selected]="comanda === comandaSelected"
-            (click)="onSelectComanda(comanda)">
-          {{comanda.ClientName}} {{comanda.EmployeeName}} {{comanda.idUnicTelefon}}{{comanda.Telefon}}{{comanda.stare}}{{comanda.DataDeschidere}}{{comanda.DataInchidere}}
-        </li>
-      </ol>
-      <form *ngIf="editing">
-        <label>Email:</label>
-        <input type="text" #email placeholder="Email" ng-required/>
-        <label>Nume:</label>
-        <input type="text" #nume placeholder="Nume" ng-required/>
-        <label>Adresa:</label>
-        <input type="text" #adresa placeholder="Adresa" ng-required/>
-        <br/>
-        <button class="btn" type="submit" (click)="saveClient(client.ID_Client,nume.value,email.value,adresa.value)">
+    <h5> Email:{{client.Email}}| Nume: {{client.Nume}}| Adresa: {{client.Adresa}}</h5>
+    <h3>Lista de comenzi</h3>
+    <ol class="comenzi">
+      <li *ngFor="let comanda of comandaList "
+          [class.selected]="comanda === comandaSelected"
+          (click)="onSelectComanda(comanda)">
+        {{comanda.ClientName}} {{comanda.EmployeeName}} {{comanda.idUnicTelefon}}{{comanda.Telefon}}{{comanda.stare}}{{comanda.DataDeschidere}}{{comanda.DataInchidere}}
+      </li>
+    </ol>
+    <form *ngIf="editing">
+      <label>Email:</label>
+      <input type="text" #email placeholder="Email" ng-required/>
+      <label>Nume:</label>
+      <input type="text" #nume placeholder="Nume" ng-required/>
+      <label>Adresa:</label>
+      <input type="text" #adresa placeholder="Adresa" ng-required/>
+      <br/>
+      <button class="btn" type="submit" (click)="saveClient(client.ID_Client,nume.value,email.value,adresa.value)">
+        Save
+      </button>
+
+    </form>
+    <button class="btn btn-primary" style="float:right" (click)="editClient()">Edit</button>
+    <button class="btn btn-primary" style="float:right" (click)="deleteClient(client.ID_Client)">Delete</button>
+    <button class="btn btn-primary" style="float:right" (click)="addButton()">Add comanda</button>
+
+  </div>
+</div>-->
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div *ngIf="client">
+
+      <h5 class="my-2"> Email: {{client.Email}} | Nume: {{client.Nume}} | Adresa: {{client.Adresa}}</h5>
+      <form *ngIf="editing" class="my-4">
+        <label class="mr-2">Email:</label>
+        <input type="text" #email placeholder="Email" ng-required />
+        <label class="mx-2">Nume:</label>
+        <input type="text" #nume placeholder="Nume" ng-required />
+        <label class="mx-2">Adresa:</label>
+        <input type="text" #adresa placeholder="Adresa" ng-required />
+        <br />
+        <button class="btn btn-outline-danger my-2" type="submit" (click)="saveClient(client.ID_Client,nume.value,email.value,adresa.value)">
           Save
         </button>
 
       </form>
-      <button class="btn btn-primary" style="float:right" (click)="editClient()">Edit</button>
-      <button class="btn btn-primary" style="float:right" (click)="deleteClient(client.ID_Client)">Delete</button>
-      <button class="btn btn-primary" style="float:right" (click)="addButton()">Add comanda</button>
-
-    </div>
-  </div>-->
-
-  <div class="container-fluid">
-
-    <div class="row">
-      <div *ngIf="client">
-
-        <h5 class="my-2"> Email: {{client.Email}} | Nume: {{client.Nume}} | Adresa: {{client.Adresa}}</h5>
-        <form *ngIf="editing" class="my-4">
-          <label class="mr-2">Email:</label>
-          <input type="text" #email placeholder="Email" ng-required />
-          <label class="mx-2">Nume:</label>
-          <input type="text" #nume placeholder="Nume" ng-required />
-          <label class="mx-2">Adresa:</label>
-          <input type="text" #adresa placeholder="Adresa" ng-required />
-          <br />
-          <button class="btn btn-outline-danger my-2" type="submit" (click)="saveClient(client.ID_Client,nume.value,email.value,adresa.value)">
-            Save
-          </button>
-
-        </form>
-        <button class="btn btn-outline-danger float-left my-1 mr-2" (click)="editClient()">Edit</button>
-        <button class="btn btn-outline-danger float-left my-1 mx-2" (click)="deleteClient(client.ID_Client)">Delete</button>
-       <!-- <button class="btn btn-outline-danger float-left my-1 mx-2" (click)="goBack()">Back</button> -->
-        <button class="btn btn-outline-danger float-left my-1 mx-2" (click)="addButton()">Add comanda</button>
-
-      </div>
+      <button class="btn btn-outline-danger float-left my-1 mr-2" (click)="editClient()">Edit</button>
+      <button class="btn btn-outline-danger float-left my-1 mx-2" (click)="deleteClient(client.ID_Client)">Delete</button>
+      <!-- <button class="btn btn-outline-danger float-left my-1 mx-2" (click)="goBack()">Back</button> -->
+      <button class="btn btn-outline-danger float-left my-1 mx-2" (click)="addButton()">Add comanda</button>
 
     </div>
 
-    <div class="row my-2">
-      <h4>Lista de comenzi</h4>
-    </div>
-    <div class="row">
-      <div class="card col-sm-12 offset-md-1 col-md-10 offset-md-1 offset-lg-2 col-lg-8 offset-lg-2">
-        <ol class="comenzi list-group list-group-flush">
-          <li class="list-group-item p-2" *ngFor="let comanda of comandaList "
-              [class.selected]="comanda === comandaSelected"
-              (click)="onSelectComanda(comanda)">
-            <div class="row text-center my-1">
-              <div class="col-sm-6">
-                <p class="font-weight-bold">Client: </p>{{comanda.ClientName}}
-              </div>
-              <div class="col-sm-6">
-                <p class="font-weight-bold">Angajat: </p>{{comanda.EmployeeName}}
-              </div>
+  </div>
+
+  <div class="row my-2">
+    <h4>Lista de comenzi</h4>
+  </div>
+
+</div>
+
+<div class="row">
+    <div class="col-sm-12 offset-md-1 col-md-10 offset-md-1 offset-lg-2 col-lg-8 offset-lg-2">
+      <div class="comenzi list-group list-group-flush">
+        <div class="list-group-item p-2 border border-danger rounded my-3" *ngFor="let comanda of comandaList; let i = index"
+            [class.selected]="comanda === comandaSelected"
+            (click)="onSelectComanda(comanda, i)">
+          <div class="row text-center my-1">
+            <div class="col-sm-12">
+              <p class="font-weight-bold">Comanda ID: </p>{{comanda.IdComanda}}
             </div>
-            <div class="row text-center my-1">
-              <div class="col-sm-6">
-                <p class="font-weight-bold">ID Unic Telefon: </p>{{comanda.idUnicTelefon}}
-              </div>
-              <div class="col-sm-6">
-                <p class="font-weight-bold">Telefon: </p>{{comanda.Telefon}}
-              </div>
+          </div>
+          <div class="row text-center my-1">
+            <div class="col-sm-6">
+              <p class="font-weight-bold">Angajat: </p>{{comanda.EmployeeName}}
             </div>
-            <div class="row text-center my-1">
-              <div class="col-sm-12">
-                <p class="font-weight-bold">Stare: </p>{{comanda.stare}}
-              </div>
+            <div class="col-sm-6">
+              <p class="font-weight-bold">Telefon: </p>{{comanda.Telefon.Marca}} {{comanda.Telefon.Brand}}
             </div>
-            <div class="row text-center my-1">
+          </div>
+          <hr />
+          <div class="row text-center my-1">
+            
               <div class="col-sm-6">
-                <p class="font-weight-bold">Data Deschidere: </p>{{comanda.DataDeschidere}}
+                <p class="font-weight-bold">ID Unic Telefon: </p>{{comanda.IdUnicTelefon}}
               </div>
               <div class="col-sm-6">
+                <div [hidden]="comanda === comandaSelected">
+                  <p class="font-weight-bold">Stare: </p>{{comanda.stare}}
+                </div>
+                <form *ngIf="comanda === comandaSelected">
+                  <label class="font-weight-bold">Inchide comanda:</label>
+                  <div>
+                    <input type="checkbox" #stare placeholder="stare" [checked]="comandaSelected.stare" />
+                  </div>
+                </form>
+              </div>
+          </div>
+          <hr />
+          <div class="row text-center my-1">
+            <div class="col-sm-6">
+              <p class="font-weight-bold">Data Deschidere: </p>{{comanda.DataDeschidere}}
+            </div>
+            <div class="col-sm-6">
+              <div [hidden]="comanda === comandaSelected">
                 <p class="font-weight-bold">Data Inchidere: </p>{{comanda.DataInchidere}}
               </div>
+              <form *ngIf="comanda === comandaSelected">
+                <label class="font-weight-bold">Selecteaza data inchidere:</label>
+                <div>
+                  <!--<input type="text" #DataInchidere placeholder="DataInchidere" [value]="comandaSelected.DataInchidere" />-->
+                  <input type="text" name="startDate" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="selectedDateInchidere" />
+                  <button (click)="d.toggle()">&dArr;</button>
+                </div>
+              </form>
             </div>
-
-
-
-          </li>
-        </ol>
+          </div>
+          <div *ngIf="comanda === comandaSelected">
+            <button (click)="update(comanda.IdComanda, stare.isChecked)" type="button" class="btn btn-outline-danger px-3 my-2">Edit Comanda</button>
+          </div>
       </div>
     </div>
-      
-    
-
-
-    <div class="row my-3">
-      <div class="col-sm-12 offset-md-1 col-md-10 offset-md-1 offset-lg-2 col-lg-8 offset-lg-2 " *ngIf="comanda">
-
-        <form>
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Alege angajat</label>
-            <select name="employee" class="form-control" id="exampleFormControlSelect1" [(ngModel)]="employeeSelected">
-              <option *ngFor="let employee of employeeList" [ngValue]="employee"
-                      [class.selected]="employee === employeeSelected"
-                      (select)="onSelect(employee)">
-                {{employee.idEmployee}}{{employee.Name}}
-              </option>
-            </select>
-            <div>
-              ati selectat : {{employeeSelected.idEmployee | json}}
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Alege tip telefon</label>
-            <select name="telefon" class="form-control" id="exampleFormControlSelect2" [(ngModel)]="telefonSelected">
-              <option *ngFor="let telefon of telefonList" [ngValue]="telefon"
-                      [class.selected]="telefon === telefonSelected"
-                      (click)="onSelectTelefon(telefon)">
-                {{telefon.Marca}} {{telefon.Brand}}
-              </option>
-
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput1">Id unic telefon</label>
-            <input [(ngModel)]="idUnicTelefon" name="idUnicTelefon" type="text" class="form-control" id="exampleFormControlInput1"
-                   placeholder="xxxzzz438763878">
-          </div>
-          <div class="d-inline-block mr-3">
-            <ng-multiselect-dropdown name="name" [placeholder]="'custom placeholder'"
-                                     [data]="dropdownList"
-                                     [(ngModel)]="selectedItems"
-                                     [settings]="dropdownSettings"
-                                     (onSelect)="onItemSelect($event)"
-                                     (onSelectAll)="onSelectAll($event)">
-            </ng-multiselect-dropdown>
-          </div>
-          <div class="d-inline-block mx-3">
-            <label>Data deschidere</label>
-
-            <div class="form-group">
-              <input type="text" name="startDate" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="selectedDateDeschidere" />
-              <button (click)="d.toggle()">&dArr;</button>
-            </div>
-          </div>
-          <div class="d-inline-block mx-3">
-            <!--<ngbd-datepicker-popup (voted)="onSelectDateDeschidere($event)"></ngbd-datepicker-popup>-->
-            Inchideti comanda <input type="checkbox" (click)="checkebox()">
-            <div *ngIf="arataDataInchidere">
-              <label>Data inchidere</label>
-              <input type="text" name="startDate" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="selectedDateInchidere" />
-              <button (click)="d.toggle()">&dArr;</button>
-            </div>
-          </div>
-          <div class="d-block">
-            <button class="btn btn-outline-danger" style="float:right"
-                    (click)="submit()">
-              Adauga comanda
-            </button>
-          </div>
-        </form>
-
-        </div>
-
-      </div>
   </div>
+ </div>
+<!--<div class="table-responsive" *ngFor="let comanda of comandaList; let i = index"
+          [class.selected]="comanda === selectedComanda"
+          (click)="onSelect(comanda, i)">
+  <form *ngIf="comanda === selectedComanda">
+    <table class="table text-center table-hover">
+
+      <thead>
+        <tr class="table-danger">
+          <th scope="col">Comanda ID</th>
+          <th scope="col">Angajat</th>
+          <th scope="col">Telefon</th>
+          <th scope="col">Id Unic Telefon</th>
+          <th scope="col">Stare</th>
+          <th scope="col">Data Deschidere</th>
+          <th scope="col">Data Inchidere</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">{{comanda.IdComanda}}</th>
+          <td>
+            <span [hidden]="comanda === selectedComanda">{{comanda.EmployeeName}}</span>
+            <input type="text" #EmployeeName placeholder="EmployeeName" [value]="selectedComanda.EmployeeName"/>
+          </td>
+          <td>
+            <span [hidden]="comanda === selectedComanda">{{comanda.Telefon.Marca}} - {{comanda.Telefon.Brand}}</span>
+            <input type="text" #Telefon placeholder="Telefon" [value]="selectedComanda.Telefon.Marca" />
+          </td>
+          <td>
+            <span [hidden]="comanda === selectedComanda">{{comanda.IdUnicTelefon}}</span>
+            <input type="text" #IdUnicTelefon placeholder="IdUnicTelefon" [value]="selectedComanda.IdUnicTelefon" />
+          </td>
+          <td>
+            <span [hidden]="comanda === selectedComanda">{{comanda.stare}}</span>
+            <input type="text" #stare placeholder="stare" [value]="selectedComanda.stare" />
+          </td>
+          <td>
+            <span [hidden]="comanda === selectedComanda">{{comanda.DataDeschidere}}</span>
+            <input type="text" #DataDeschidere placeholder="DataDeschidere" [value]="selectedComanda.DataDeschidere" />
+          </td>
+          <td>
+            <span [hidden]="comanda === selectedComanda">{{comanda.DataInchidere}}</span>
+            <input type="text" #DataInchidere placeholder="DataInchidere" [value]="selectedComanda.DataInchidere" />
+          </td>
+          <td>
+            <button class="btn btn-outline-danger float-right" (click)="gotodetail(comanda)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </form>
+
+</div>-->
+
+<div class="container-fluid">
+  <div class="row my-3">
+    <div class="col-sm-12 offset-md-1 col-md-10 offset-md-1 offset-lg-2 col-lg-8 offset-lg-2 " *ngIf="comanda">
+
+      >
+
+      <form>
+        >
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Alege angajat</label>
+          <select name="employee" class="form-control" id="exampleFormControlSelect1" [(ngModel)]="employeeSelected">
+            r=
+            <option *ngFor="let employee of employeeList" [ngValue]="employee"
+                    [class.selected]="employee === employeeSelected"
+                    (select)="onSelect(employee)">
+              {{employee.idEmployee}}{{employee.Name}}
+            </option>
+          </select>
+          <div>
+            ati selectat : {{employeeSelected.idEmployee | json}}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Alege tip telefon</label>
+          <select name="telefon" class="form-control" id="exampleFormControlSelect2" [(ngModel)]="telefonSelected">
+            <option *ngFor="let telefon of telefonList" [ngValue]="telefon"
+                    [class.selected]="telefon === telefonSelected"
+                    (click)="onSelectTelefon(telefon)">
+              {{telefon.Marca}} {{telefon.Brand}}
+            </option>
+
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Id unic telefon</label>
+          <input [(ngModel)]="idUnicTelefon" name="idUnicTelefon" type="text" class="form-control" id="exampleFormControlInput1"
+                 placeholder="xxxzzz438763878">
+        </div>
+        <div class="d-inline-block mr-3">
+          <ng-multiselect-dropdown name="name" [placeholder]="'custom placeholder'"
+                                   [data]="dropdownList"
+                                   [(ngModel)]="selectedItems"
+                                   [settings]="dropdownSettings"
+                                   (onSelect)="onItemSelect($event)"
+                                   (onSelectAll)="onSelectAll($event)">
+          </ng-multiselect-dropdown>
+        </div>
+        <div class="d-inline-block mx-3">
+          <label>Data deschidere</label>
+
+          <div class="form-group">
+            <input type="text" name="startDate" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="selectedDateDeschidere" />
+            <button (click)="d.toggle()">&dArr;</button>
+          </div>
+        </div>
+        <div class="d-inline-block mx-3">
+          <!--<ngbd-datepicker-popup (voted)="onSelectDateDeschidere($event)"></ngbd-datepicker-popup>-->
+          Inchideti comanda <input type="checkbox" (click)="checkebox()">
+          <div *ngIf="arataDataInchidere">
+            <label>Data inchidere</label>
+            <input type="text" name="startDate" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="selectedDateInchidere" />
+            <button (click)="d.toggle()">&dArr;</button>
+          </div>
+        </div>
+        <div class="d-block">
+          <button class="btn btn-outline-danger" style="float:right"
+                  (click)="submit()">
+            Adauga comanda
+          </button>
+        </div>
+      </form>
+      <div class="mb-5">
+      </div>
+      <div class="mb-5">
+      </div>
+      <hr class="my-5" />
+      <div class="mb-5">
+      </div>
+      <div class="mb-5">
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+
 

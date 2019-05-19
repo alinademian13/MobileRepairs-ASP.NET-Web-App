@@ -6,7 +6,6 @@ import {ApiService} from '../../../service/api.service';
 import {EmployeeId} from '../../../shared/Models/employeeId';
 import {Telefon} from '../../../shared/Models/telefon';
 import {TelefonService} from '../../../service/telefon.service';
-import {error} from '@angular/compiler/src/util';
 import {NavbarService} from '../../../service/navbar.service';
 import {NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import {ComandaDtoList} from '../../../shared/DTOs/ComandaDtoList';
@@ -16,7 +15,6 @@ import { DefectiuneService } from '../../../service/defectiune.service';
 import { Observable } from 'rxjs';
 import { defectiuneListDto } from '../../../shared/DTOs/defectiuneListDto';
 
-
 @Component({
   selector: 'app-client-detail',
   templateUrl: './client-detail.component.html',
@@ -24,7 +22,11 @@ import { defectiuneListDto } from '../../../shared/DTOs/defectiuneListDto';
 })
 export class ClientDetailComponent implements OnInit {
   comandaSelected: ComandaDtoList = new ComandaDtoList();
+
   comandaList: Array<ComandaDtoList>
+  selectedComanda: ComandaDtoList;
+  selectedComandaIndex: number;
+
   employeeList: Array<EmployeeId>
   client: ClientDTO = new ClientDTO();
   editing: boolean = false;
@@ -71,9 +73,16 @@ export class ClientDetailComponent implements OnInit {
     this.getEmployeeList();
     this.getTelefonList();
     this.getComandaList(this.client.ID_Client);
+    this.getDefectiuniList();
 
 
     this.dropdownList = this.defectiuneList;
+    console.log("1:");
+    console.log(this.dropdownList)
+    console.log("2:");
+    //console.log(this.defectiuneList);
+
+    setTimeout(function () { console.log(this.defectiuneList)}, 2000);
 
 
     this.selectedItems = [
@@ -93,7 +102,8 @@ export class ClientDetailComponent implements OnInit {
 
   getDefectiuniList() {
     this.defectiuneService.getDefectiuni().then(rsp => {
-      this.defectiuneList = rsp; console.log(rsp);
+      this.defectiuneList = rsp;
+      //console.log(rsp);
     }, err => {
       console.log(' error', err);
     });
@@ -118,7 +128,7 @@ export class ClientDetailComponent implements OnInit {
   getTelefonList() {
     this.telefonService.getTelefonList().subscribe(
       telefonList => this.telefonList = telefonList,
-      error1 => this.errorMessage = error as any
+      error1 => this.errorMessage = error1 as any
     );
 
   }
@@ -135,7 +145,7 @@ export class ClientDetailComponent implements OnInit {
   getEmployeeList() {
     this.apiService.getEmployees().subscribe(
       employeeList => this.employeeList = employeeList,
-      error1 => this.errorMessage = error as any
+      error1 => this.errorMessage = error1 as any
     );
 
   }
@@ -157,10 +167,10 @@ export class ClientDetailComponent implements OnInit {
     );
   }
 
-   // save(): void {
-   // this.clientService.update(this.client)
-   //   .subscribe(_ => this.goBack());
-   // }
+  //update(): void {
+  //  this.clientService.updateComanda(this.client)
+  //    .subscribe(_ => this.goBack());
+  //}
 
   onSelect(employee: EmployeeId) {
     this.employeeSelected = employee;
@@ -211,5 +221,6 @@ export class ClientDetailComponent implements OnInit {
 
   onSelectComanda(comanda: ComandaDtoList) {
     this.comandaSelected = comanda;
+    console.log(comanda.IdComanda);
   }
 }
