@@ -14,7 +14,7 @@ export class ComandaService {
   }
 
 
-  getComenzi(): Promise<ComandaDtoList[]> {
+  getComenzi() {
     return this.http.get<ComandaDtoList[]>(environment.apiurl + '/Comanda/GetComandaList').toPromise();
   }
 }
