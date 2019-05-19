@@ -5,7 +5,7 @@ export class AddComandaDto {
   idEmployee: number;
   idTelefon: number;
   idUnicTelefon: number;
-  stare: boolean = null;
+  stare: boolean;
   DataDeschidere: any;
   DataInchidere: any = null;
 }
