@@ -41,7 +41,7 @@ namespace CustomerOrder.Controllers
             if (cm.DataInchidere == null)
             {
                 addComandaDto1.DataInchidere = "";
-                addComandaDto1.stare = false;
+                addComandaDto1.stare = !addComandaDto1.stare.Value;
             } else
             {
                 cm.DataInchidere = DateTime.ParseExact(addComandaDto1.DataInchidere, "yyyy-MM-dd", CultureInfo.InvariantCulture);
@@ -50,31 +50,6 @@ namespace CustomerOrder.Controllers
 
             return Ok(comandaService.AddComanda(cm));
         }
-
-        //[HttpPost]
-        //public IHttpActionResult AddComanda([FromBody] int idClient, 
-        //                                    [FromBody] int idEmployee, 
-        //                                    [FromBody] int idTelefon, 
-        //                                    [FromBody] int idUnicTelefon,
-        //                                    [FromBody] bool? stare, 
-        //                                    [FromBody] string dataDeschidere,
-        //                                    [FromBody] string dataInchidere,
-        //                                    [FromBody] ICollection<defectiune> defectiuni)
-        //{
-
-        //    DAL.Comanda cm = new DAL.Comanda();
-        //    cm.idClient = idClient;
-        //    cm.idEmployee = idEmployee;
-        //    cm.idTelefon = idTelefon;
-        //    cm.idUnicTelefon = idUnicTelefon;
-        //    cm.stare = stare;
-        //    cm.DataDeschidere = DateTime.ParseExact(dataDeschidere, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-        //    cm.DataInchidere = DateTime.ParseExact(dataInchidere, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-        //    cm.defectiune = defectiuni;
-
-        //    return Ok(comandaService.AddComanda(cm));
-        //}
-
 
         [HttpPut]
 
