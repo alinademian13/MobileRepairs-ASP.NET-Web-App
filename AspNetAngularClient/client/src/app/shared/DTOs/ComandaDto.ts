@@ -8,6 +8,6 @@ export class ComandaDto {
   telefon: TelefonDto;
   idUnicTelefon: number;
   stare: boolean;
-  DataDeschidere: any;
+  DataDeschidere: any=null;
   DataInchidere: any;
 }

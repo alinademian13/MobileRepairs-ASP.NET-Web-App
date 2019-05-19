@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 
 namespace CustomerOrder.Controllers
 {
+    [Authorize]
     public class ComandaController : ApiController
     {
         private ComandaService comandaService = new ComandaService();

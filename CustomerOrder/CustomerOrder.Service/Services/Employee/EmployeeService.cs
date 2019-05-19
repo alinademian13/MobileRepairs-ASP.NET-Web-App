@@ -1,4 +1,5 @@
 ﻿using CustomerOrder.DTO;
+using CustomerOrder.Service.Services.Employee.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,6 +62,14 @@ namespace CustomerOrder.Service.Services.Employee
             DbContext.SaveChanges();
             return "adaugat";
         }
+        //public UserDisplayDTO GetDisplayName(int loggedUserID)
+        //{
+        //    return DbContext.employee.Where(x => x.idEmployee == loggedUserID)
+        //        .Select(x => new UserDisplayDTO()
+        //    {
+        //        UserName = x.Name
+        //    }).FirstOrDefault();
+        //}
 
 
     }
