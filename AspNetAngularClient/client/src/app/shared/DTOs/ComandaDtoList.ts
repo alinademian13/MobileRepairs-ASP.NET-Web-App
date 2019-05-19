@@ -1,15 +1,16 @@
 import {TelefonDto} from './TelefonDto';
-import { ComandaDto } from './ComandaDto';
+import {Defectiune} from './defectiune';
 
 export class ComandaDtoList {
-  ComandaList: ComandaDto[] = [];
-  //idComanda: number;
-  //idClient: number;
-  //ClientName: string;
-  //EmployeeName: string;
-  //Telefon: TelefonDto;
-  //idUnicTelefon: number;
-  //stare: boolean;
-  //DataDeschidere: string;
-  //DataInchidere: string;
+
+  idComanda: number;
+  idClient: number;
+  ClientName: string;
+  EmployeeName: string;
+  Telefon: TelefonDto;
+  idUnicTelefon: number;
+  stare: boolean;
+  DefectiuniDtos: Array<Defectiune>;
+  DataDeschidere: string;
+  DataInchidere: string;
 }

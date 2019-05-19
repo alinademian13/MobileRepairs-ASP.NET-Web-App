@@ -1,4 +1,4 @@
-//import {TelefonDto} from './telefon/TelefonDto';
+import {Defectiune} from '../DTOs/defectiune';
 
 export class Comanda {
 
@@ -7,6 +7,7 @@ export class Comanda {
   idTelefon: number;
   idUnicTelefon: number;
   stare: boolean;
+  Defectiuni: Array<Defectiune>;
   DataDeschidere: Date;
   DataInchidere: Date;
 

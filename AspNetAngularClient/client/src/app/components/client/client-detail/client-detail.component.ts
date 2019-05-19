@@ -4,14 +4,12 @@ import {ClientDTO} from '../../../shared/DTOs/ClientDTO';
 import {ClientService} from '../../../service/client.service';
 import {ApiService} from '../../../service/api.service';
 import {EmployeeId} from '../../../shared/Models/employeeId';
-import {TelefonDto} from '../../../shared/DTOs/TelefonDto';
 import {Telefon} from '../../../shared/Models/telefon';
 import {TelefonService} from '../../../service/telefon.service';
 import {error} from '@angular/compiler/src/util';
-import {ComandaDto} from '../../../shared/DTOs/ComandaDto';
 import {NavbarService} from '../../../service/navbar.service';
 import {NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
-import {ComandaDtoList} from "../../../shared/DTOs/ComandaDtoList";
+import {ComandaDtoList} from '../../../shared/DTOs/ComandaDtoList';
 import { Location } from '@angular/common';
 import { Defectiune } from '../../../shared/DTOs/defectiune';
 import { DefectiuneService } from '../../../service/defectiune.service';
@@ -25,7 +23,7 @@ import { defectiuneListDto } from '../../../shared/DTOs/defectiuneListDto';
   styleUrls: ['./client-detail.component.css']
 })
 export class ClientDetailComponent implements OnInit {
-  comandaSelected: ComandaDto = new ComandaDto();
+  comandaSelected: ComandaDtoList = new ComandaDtoList();
   comandaList: Array<ComandaDtoList>
   employeeList: Array<EmployeeId>
   client: ClientDTO = new ClientDTO();
@@ -100,12 +98,12 @@ export class ClientDetailComponent implements OnInit {
     console.log(items);
   }
 
-  //getDefectiuniList() {
+  // getDefectiuniList() {
   //  this.defectiuneService.getDefectiuni().then(
   //    defectiuniList => this.defectiuneList = defectiuniList,
   //    error => this.errorMessage = error as any
   //  );
-  //}
+  // }
 
   goBack(): void {
     this.location.back();
@@ -118,7 +116,7 @@ export class ClientDetailComponent implements OnInit {
   getTelefonList() {
     this.telefonService.getTelefonList().subscribe(
       telefonList => this.telefonList = telefonList,
-      error => this.errorMessage = error as any
+      error1 => this.errorMessage = error as any
     );
 
   }
@@ -135,7 +133,7 @@ export class ClientDetailComponent implements OnInit {
   getEmployeeList() {
     this.apiService.getEmployees().subscribe(
       employeeList => this.employeeList = employeeList,
-      error => this.errorMessage = error as any
+      error1 => this.errorMessage = error as any
     );
 
   }
@@ -157,10 +155,10 @@ export class ClientDetailComponent implements OnInit {
     );
   }
 
-   //save(): void {
+   // save(): void {
    // this.clientService.update(this.client)
    //   .subscribe(_ => this.goBack());
-   //}
+   // }
 
   onSelect(employee: EmployeeId) {
     this.employeeSelected = employee;
@@ -197,7 +195,7 @@ export class ClientDetailComponent implements OnInit {
       });
   }
 
-  //addComanda(idClient: number, idEmployee: number, Telefon1: Telefon,
+  // addComanda(idClient: number, idEmployee: number, Telefon1: Telefon,
   //           idUnicTelefon: string, stare: boolean, DataDeschidere: Date, DataInchidere: Date) {
 
   //  this.apiService.addComanda(idClient, idEmployee, Telefon1.IdTelefon,
@@ -207,9 +205,9 @@ export class ClientDetailComponent implements OnInit {
   //    }
   //  });
 
-  //}
+  // }
 
-  onSelectComanda(comanda: ComandaDto) {
+  onSelectComanda(comanda: ComandaDtoList) {
     this.comandaSelected = comanda;
   }
 }
