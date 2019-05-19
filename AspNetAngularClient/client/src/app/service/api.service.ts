@@ -6,10 +6,8 @@ import {Employee} from './../shared/DTOs/employee';
 import {environment} from 'src/environments/environment';
 import {EmployeeId} from './../shared/Models/employeeId';
 import {Comanda} from './../shared/Models/Comanda';
-import {TelefonDto} from './../shared/DTOs/TelefonDto';
-import {ComandaDto} from './../shared/DTOs/ComandaDto';
-import {ComandaDtoList} from "../shared/DTOs/ComandaDtoList";
-import { AddComandaDto } from '../shared/DTOs/AddComandaDto';
+import {ComandaDtoList} from '../shared/DTOs/ComandaDtoList';
+import {Defectiune} from '../shared/DTOs/defectiune';
 
 
 const httpOptions = {
@@ -57,14 +55,8 @@ export class ApiService {
   }
 
   addComanda(idClient: number, idEmployee: number, idTelefon: number,
-    idUnicTelefon: number, stare: boolean, DataDeschidere: any, DataInchidere: any): Observable<any> {
-
-    const DataDeschidere1 = DataDeschidere + ' ' + '00' + ':' + '00' as string;
-    console.log(DataDeschidere1);
-
-    const DataInchidere1 = DataInchidere + ' ' + '00' + ':' + '00' as string;
-
-    //  "yyyy-MM-dd HH:mm"
+             idUnicTelefon: number, stare: boolean, Defectiuni: Array<Defectiune>,
+             DataDeschidere: any, DataInchidere: any): Observable<any> {
 
 
     const comanda = {
@@ -73,9 +65,10 @@ export class ApiService {
       idTelefon,
       idUnicTelefon,
       stare,
+      Defectiuni,
       DataDeschidere,
       DataInchidere
-    } as AddComandaDto;
+    } as Comanda;
 
     return this.http.post(environment.apiurl + '/Comanda/AddComanda', comanda);
   }
