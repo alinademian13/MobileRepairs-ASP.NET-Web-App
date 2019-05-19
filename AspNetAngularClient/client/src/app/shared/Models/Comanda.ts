@@ -8,7 +8,7 @@ export class Comanda {
   idUnicTelefon: number;
   stare: boolean;
   Defectiuni: Array<Defectiune>;
-  DataDeschidere: Date;
-  DataInchidere: Date;
+  DataDeschidere: any;
+  DataInchidere: any = null;
 
 }
