@@ -39,7 +39,7 @@ export class ClientDetailComponent implements OnInit {
   selectedDateInchidere: NgbDate;
   idUnicTelefon: number;
 
-  defectiuneList: Array<defectiuneListDto>;
+  defectiuneList: Array<Defectiune>;
 
   dropdownList = [];
   selectedItems = [];
@@ -91,6 +91,14 @@ export class ClientDetailComponent implements OnInit {
     };
   }
 
+  getDefectiuniList() {
+    this.defectiuneService.getDefectiuni().then(rsp => {
+      this.defectiuneList = rsp; console.log(rsp);
+    }, err => {
+      console.log(' error', err);
+    });
+  }
+
   onItemSelect(item: any) {
     console.log(item);
   }
@@ -98,12 +106,6 @@ export class ClientDetailComponent implements OnInit {
     console.log(items);
   }
 
-  // getDefectiuniList() {
-  //  this.defectiuneService.getDefectiuni().then(
-  //    defectiuniList => this.defectiuneList = defectiuniList,
-  //    error => this.errorMessage = error as any
-  //  );
-  // }
 
   goBack(): void {
     this.location.back();
@@ -187,7 +189,7 @@ export class ClientDetailComponent implements OnInit {
     const selectedDateD = this.ngbDateParserFormatter.format(this.selectedDateDeschidere)
     const selectedDateI = this.ngbDateParserFormatter.format(this.selectedDateInchidere)
     this.apiService.addComanda(
-      this.client.ID_Client, this.employeeSelected.idEmployee, this.telefonSelected.IdTelefon, this.idUnicTelefon, true, selectedDateD, selectedDateI)
+      this.client.ID_Client, this.employeeSelected.idEmployee, this.telefonSelected.IdTelefon, this.idUnicTelefon, true, this.defectiuneList, selectedDateD, selectedDateI)
       .subscribe(() => {
         this.router.navigate(['/comanda']);
       }, err => {

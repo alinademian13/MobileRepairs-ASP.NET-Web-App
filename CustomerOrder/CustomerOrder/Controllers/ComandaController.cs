@@ -41,7 +41,7 @@ namespace CustomerOrder.Controllers
             if (cm.DataInchidere == null)
             {
                 addComandaDto1.DataInchidere = "";
-                addComandaDto1.stare = !addComandaDto1.stare.Value;
+                addComandaDto1.stare = !addComandaDto1.stare.Equals(false);
             } else
             {
                 cm.DataInchidere = DateTime.ParseExact(addComandaDto1.DataInchidere, "yyyy-MM-dd", CultureInfo.InvariantCulture);
