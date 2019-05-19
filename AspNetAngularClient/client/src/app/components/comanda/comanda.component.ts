@@ -23,6 +23,8 @@ export class ComandaComponent implements OnInit {
     this.getComenzi();
   }
 
+
+
   getComenzi() {
     this.comandaService.getComenzi().then(
       comandaList => this.comenzi = comandaList,

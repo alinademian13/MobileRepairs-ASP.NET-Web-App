@@ -53,7 +53,11 @@ export class ApiService {
 
   getComandaById(id: number): Promise<ComandaDtoList[]> {
     return this.http.get<ComandaDtoList[]>(environment.apiurl + '/Comanda/GetComandaById?id=' + id).toPromise();
+
+
   }
+
+
 
   addComanda(idClient: number, idEmployee: number, idTelefon: number,
              idUnicTelefon: number, stare: boolean, Defectiuni: Array<DefectiuneId>,
