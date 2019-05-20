@@ -11,6 +11,8 @@ import {NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import {ComandaDtoList} from '../../../shared/DTOs/ComandaDtoList';
 import {Location} from '@angular/common';
 import {DefectiuneService} from '../../../service/defectiune.service';
+import {ComandaService} from "../../../service/comanda.service";
+import {findR3SymbolsPath} from "@angular/compiler-cli/src/ngcc/src/packages/bundle_program";
 
 
 @Component({
@@ -19,8 +21,9 @@ import {DefectiuneService} from '../../../service/defectiune.service';
   styleUrls: ['./client-detail.component.css']
 })
 export class ClientDetailComponent implements OnInit {
-  comandaSelected: ComandaDtoList = new ComandaDtoList();
 
+
+  comandaSelected: ComandaDtoList = new ComandaDtoList();
   comandaList: Array<ComandaDtoList>
   selectedComanda: ComandaDtoList;
   selectedComandaIndex: number;
@@ -46,7 +49,8 @@ export class ClientDetailComponent implements OnInit {
   selectedItems = [];
   dropdownSettings = {};
 
-  constructor(private clientService: ClientService,
+  constructor(private comandaService: ComandaService,
+              private clientService: ClientService,
               private router: Router,
               private route: ActivatedRoute,
               private apiService: ApiService,
@@ -146,10 +150,12 @@ export class ClientDetailComponent implements OnInit {
     );
   }
 
- // update(): void {
- //   this.update()
-   //   .subscribe(_ => this.goBack());
-//  }
+  update(): void {
+    const selectedDateI = this.ngbDateParserFormatter.format(this.selectedDateInchidere)
+    this.comandaService.updateComanda(this.client.ID_Client, false, selectedDateI).then(rsp =>
+      console.log(rsp)
+    );
+  }
 
   //saveClient(id, nume, email, adresa): void {
   //  this.clientService.updateClient(id, nume, email, adresa)

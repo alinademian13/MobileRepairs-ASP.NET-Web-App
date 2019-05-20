@@ -56,9 +56,9 @@ namespace CustomerOrder.Controllers
 
         [HttpPut]
 
-        public IHttpActionResult UpdateComanda([FromUri] int id, [FromBody] EditComandaDto editComandaDto)
+        public IHttpActionResult UpdateComanda([FromUri] int id, [FromUri] bool Stare, [FromUri] string DataInchidere)
         {
-            return Ok(comandaService.updateComanda(id, editComandaDto));
+            return Ok(comandaService.updateComanda(id, Stare,DataInchidere));
         }
 
         [HttpDelete]
