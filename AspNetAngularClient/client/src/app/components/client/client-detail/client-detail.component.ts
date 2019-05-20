@@ -10,13 +10,8 @@ import {NavbarService} from '../../../service/navbar.service';
 import {NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import {ComandaDtoList} from '../../../shared/DTOs/ComandaDtoList';
 import {Location} from '@angular/common';
-import {Defectiune} from '../../../shared/DTOs/defectiune';
 import {DefectiuneService} from '../../../service/defectiune.service';
-import {Observable} from 'rxjs';
-import {DefectiuneMultiSelect} from "../../../shared/DTOs/DefectiuneMultiSelect";
-import {DefectiuneId} from "../../../shared/Models/defectiuneId";
-import {ListItem} from "ng-multiselect-dropdown/multiselect.model";
-import {forEach} from "@angular/router/src/utils/collection";
+
 
 @Component({
   selector: 'app-client-detail',
@@ -29,7 +24,9 @@ export class ClientDetailComponent implements OnInit {
   comandaList: Array<ComandaDtoList>
   selectedComanda: ComandaDtoList;
   selectedComandaIndex: number;
-
+  Email: string;
+  Nume: string;
+  Adresa: string;
   employeeList: Array<EmployeeId>
   client: ClientDTO = new ClientDTO();
   editing: boolean = false;
@@ -93,7 +90,7 @@ export class ClientDetailComponent implements OnInit {
 
   getDefectiuniList() {
     this.defectiuneService.getDefectiuni().then(
-      rsp => this.dropdownList = rsp.map(d => ({ id: d.Id, text: d.Nume + " - " + d.Cost })),
+      rsp => this.dropdownList = rsp.map(d => ({id: d.Id, text: d.Nume + " - " + d.Cost})),
       err => alert(err)
     );
   }
@@ -149,15 +146,15 @@ export class ClientDetailComponent implements OnInit {
     );
   }
 
-  //update(): void {
-  //  this.clientService.updateComanda(this.client)
-  //    .subscribe(_ => this.goBack());
-  //}
+ // update(): void {
+ //   this.update()
+   //   .subscribe(_ => this.goBack());
+//  }
 
-   saveClient(id, nume, email, adresa): void {
-   this.clientService.updateClient(id, nume, email, adresa)
-     .then(_ => this.goBack());
-   }
+  saveClient(id, nume, email, adresa): void {
+    this.clientService.updateClient(id, nume, email, adresa)
+      .then(_ => this.goBack());
+  }
 
 
   onSelect(employee: EmployeeId) {
@@ -207,5 +204,9 @@ export class ClientDetailComponent implements OnInit {
   onSelectComanda(comanda: ComandaDtoList) {
     this.comandaSelected = comanda;
     console.log(comanda.IdComanda);
+  }
+
+  updateClient() {
+    this.clientService.updateClient(this.client.ID_Client, this.Nume, this.Email, this.Adresa);
   }
 }

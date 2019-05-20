@@ -40,13 +40,13 @@
       <h5 class="my-2"> Email: {{client.Email}} | Nume: {{client.Nume}} | Adresa: {{client.Adresa}}</h5>
       <form *ngIf="editing" class="my-4">
         <label class="mr-2">Email:</label>
-        <input type="text" #email placeholder="Email" ng-required />
+        <input type="text" [(ngModel)]="Email"  name="email" placeholder="Email" ng-required />
         <label class="mx-2">Nume:</label>
-        <input type="text" #nume placeholder="Nume" ng-required />
+        <input type="text" [(ngModel)]="Nume" name="nume" placeholder="Nume" ng-required />
         <label class="mx-2">Adresa:</label>
-        <input type="text" #adresa placeholder="Adresa" ng-required />
+        <input type="text" [(ngModel)]="Adresa" name="adresa" placeholder="Adresa" ng-required />
         <br />
-        <button class="btn btn-outline-danger my-2" type="submit" (click)="saveClient(client.ID_Client,nume.value,email.value,adresa.value)">
+        <button class="btn btn-outline-danger my-2" type="submit" (click)="updateClient()">
           Save
         </button>
 
@@ -98,7 +98,7 @@
               <form *ngIf="comanda === comandaSelected">
                 <label class="font-weight-bold">Inchide comanda:</label>
                 <div>
-                  <input type="checkbox" #stare placeholder="stare" [checked]="comandaSelected.stare" />
+                  <input type="checkbox" #stare placeholder="stare" [checked]="comandaSelected.Stare" />
                 </div>
               </form>
             </div>

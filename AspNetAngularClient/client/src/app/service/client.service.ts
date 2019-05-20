@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import { ClientListDTO } from "./../shared/DTOs/clientListDTO";
-import { ClientDTO } from "./../shared/DTOs/ClientDTO";
+import { ClientListDTO } from './../shared/DTOs/clientListDTO';
+import { ClientDTO } from './../shared/DTOs/ClientDTO';
 
 @Injectable({
   providedIn: 'root'

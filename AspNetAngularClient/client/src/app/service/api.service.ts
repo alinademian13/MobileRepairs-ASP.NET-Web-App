@@ -8,7 +8,7 @@ import {EmployeeId} from './../shared/Models/employeeId';
 import {Comanda} from './../shared/Models/Comanda';
 import {ComandaDtoList} from '../shared/DTOs/ComandaDtoList';
 import {Defectiune} from '../shared/DTOs/defectiune';
-import {DefectiuneId} from "../shared/Models/defectiuneId";
+import {DefectiuneId} from '../shared/Models/defectiuneId';
 
 
 const httpOptions = {
