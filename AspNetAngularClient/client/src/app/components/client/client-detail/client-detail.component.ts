@@ -151,10 +151,10 @@ export class ClientDetailComponent implements OnInit {
    //   .subscribe(_ => this.goBack());
 //  }
 
-  saveClient(id, nume, email, adresa): void {
-    this.clientService.updateClient(id, nume, email, adresa)
-      .then(_ => this.goBack());
-  }
+  //saveClient(id, nume, email, adresa): void {
+  //  this.clientService.updateClient(id, nume, email, adresa)
+  //    .then(_ => this.goBack());
+  //}
 
 
   onSelect(employee: EmployeeId) {
@@ -207,6 +207,12 @@ export class ClientDetailComponent implements OnInit {
   }
 
   updateClient() {
-    this.clientService.updateClient(this.client.ID_Client, this.Nume, this.Email, this.Adresa);
+    this.clientService.updateClient(this.client.ID_Client, this.Nume, this.Email, this.Adresa).then(
+      () => {
+        this.router.navigateByUrl('/client');
+      }),
+      error => {
+        console.log('error', error);
+      }
   }
 }

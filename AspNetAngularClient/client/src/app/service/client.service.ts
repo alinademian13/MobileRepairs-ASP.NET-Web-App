@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import { ClientListDTO } from './../shared/DTOs/clientListDTO';
 import { ClientDTO } from './../shared/DTOs/ClientDTO';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
