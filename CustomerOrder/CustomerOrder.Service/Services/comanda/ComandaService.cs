@@ -81,20 +81,16 @@ namespace CustomerOrder.Service.Services.comanda
         }
 
 
-        public bool updateComanda(int id, CustomerOrder.Service.DTO.EditComandaDto editComandaDto)
+        public bool updateComanda(int id, bool stare , string DataInchidere)
         {
             bool succes = false;
 
             DAL.Comanda t = DbContext.Comanda.Find(id);
             if (t != null)
             {
-                t.idClient = editComandaDto.idClient;
-                t.idEmployee = editComandaDto.idEmployee;
-                t.idTelefon = editComandaDto.idTelefon;
-                t.idUnicTelefon = editComandaDto.idUnicTelefon;
-                t.stare = editComandaDto.stare;
-                t.DataDeschidere = editComandaDto.DataDeschidere;
-                t.DataInchidere = editComandaDto.DataInchidere;
+                
+                t.stare = stare;
+                t.DataInchidere = DateTime.ParseExact(DataInchidere, "yyyy-MM-dd", CultureInfo.InvariantCulture); ;
                 DbContext.SaveChanges();
                 succes = true;
                 return succes;
